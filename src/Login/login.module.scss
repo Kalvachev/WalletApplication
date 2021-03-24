@@ -3,6 +3,19 @@
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    margin: 100px 0 0 0 !important;
-    // border: 1px solid rgb(156, 156, 156);
+    margin: 200px 0 0 0 !important;
+}
+
+.loginHeading {
+    align-self: center;
+    margin: 0 0 20px 0;
+    font-size: 30px;
+}
+
+.loginCard {
+    min-width: 500px;
+}
+
+.loginRow {
+    margin-top: 7%;
 }

@@ -1,8 +1,22 @@
-.registerForm{
+.registerForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    margin: 100px 0 0 0 !important;
-    // border: 1px solid rgb(156, 156, 156);
+    margin: 200px 0 0 0 !important;
+}
+
+.registerHeading {
+    align-self: center;
+    margin: 0 0 20px 0;
+    font-size: 30px;
+}
+
+.registerCard {
+    min-width: 500px;
+    min-height: 200px;
+}
+
+.registerRow {
+    margin-top: 7%;
 }

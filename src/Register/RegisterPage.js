@@ -1,10 +1,10 @@
 import React from 'react'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './register.module.scss'
 
 
 export default function RegisterPage() {
-    
+
     const formItemLayout = {
         labelCol: {
             xs: {
@@ -40,93 +40,97 @@ export default function RegisterPage() {
 
     return (
         <>
-            <Form className={styles.registerForm}
-                {...formItemLayout}
-                form={form}
-                name="register"
-                initialValues={{
-                    residence: ['zhejiang', 'hangzhou', 'xihu'],
-                    prefix: '86',
-                }}
-                scrollToFirstError
-            >
-                <Form.Item
-                    name="nickname"
-                    label="Nickname"
-                    tooltip="What do you want others to call you?"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your nickname!',
-                            whitespace: true,
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
+            <Row type="flex" justify="center" align="middle" className={styles.registerRow}>
+                <Col>
+                    <Card className={styles.registerCard} >
+                        <Form className={styles.registerForm}
+                            {...formItemLayout}
+                            form={form}
+                            name="register"
+                            scrollToFirstError
+                        >
+                            <h2 className={styles.registerHeading}>Register</h2>
+
+                            <Form.Item
+                                name="nickname"
+                                label="Nickname"
+                                tooltip="What do you want others to call you?"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your nickname!',
+                                        whitespace: true,
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
 
 
-                <Form.Item
-                    name="email"
-                    label="E-mail"
-                    rules={[
-                        {
-                            type: 'email',
-                            message: 'The input is not valid E-mail!',
-                        },
-                        {
-                            required: true,
-                            message: 'Please input your E-mail!',
-                        },
-                    ]}
-                >
-                    <Input />
-                </Form.Item>
+                            <Form.Item
+                                name="email"
+                                label="E-mail"
+                                rules={[
+                                    {
+                                        type: 'email',
+                                        message: 'The input is not valid E-mail!',
+                                    },
+                                    {
+                                        required: true,
+                                        message: 'Please input your E-mail!',
+                                    },
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
 
-                <Form.Item
-                    name="password"
-                    label="Password"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your password!',
-                        },
-                    ]}
-                    hasFeedback
-                >
-                    <Input.Password />
-                </Form.Item>
+                            <Form.Item
+                                name="password"
+                                label="Password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your password!',
+                                    },
+                                ]}
+                                hasFeedback
+                            >
+                                <Input.Password />
+                            </Form.Item>
 
-                <Form.Item
-                    name="confirm"
-                    label="Confirm Password"
-                    dependencies={['password']}
-                    hasFeedback
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please confirm your password!',
-                        },
-                        ({ getFieldValue }) => ({
-                            validator(_, value) {
-                                if (!value || getFieldValue('password') === value) {
-                                    return Promise.resolve();
-                                }
+                            <Form.Item
+                                name="confirm"
+                                label="Confirm Password"
+                                dependencies={['password']}
+                                hasFeedback
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please confirm your password!',
+                                    },
+                                    ({ getFieldValue }) => ({
+                                        validator(_, value) {
+                                            if (!value || getFieldValue('password') === value) {
+                                                return Promise.resolve();
+                                            }
 
-                                return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                            },
-                        }),
-                    ]}
-                >
-                    <Input.Password />
+                                            return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                                        },
+                                    }),
+                                ]}
+                            >
+                                <Input.Password />
 
-                </Form.Item>
-                <Form.Item {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">
-                        Register
-              </Button>
-                </Form.Item>
-            </Form>
+                            </Form.Item>
+                            <Form.Item {...tailFormItemLayout}>
+                                <Button type="primary" htmlType="submit">
+                                    Register
+                                </Button>
+                            </Form.Item>
+                        </Form>
+                    </Card>
+                </Col>
+            </Row>
         </>
     );
 }
