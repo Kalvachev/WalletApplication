@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import {
     Form,
     Input,
@@ -14,6 +15,7 @@ import {
     Col,
     Card
 } from 'antd';
+
 import styles from './homepage.module.scss';
 
 
@@ -48,40 +50,43 @@ export default function HomePageForm() {
                                 Hello, username!
                                 Your Balance is 0$
                             </h2>
-                            <Form.Item label="InputNumber">
-                                <InputNumber />
-                            </Form.Item>
-                            <Form.Item label="Select">
-                                <Select>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
 
-                                </Select>
-                            </Form.Item>
+                            <div id={styles.firstHomePageItemsRow}>
+                                <Form.Item label="Type" className={styles.homepageType}>
+                                    <Select>
+                                        <Select.Option value="income">Income</Select.Option>
+                                        <Select.Option value="expense">Expense</Select.Option>
+                                    </Select>
+                                </Form.Item>
 
-                            <Form.Item label="Select">
-                                <Select>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
-                                    <Select.Option value="demo">Demo</Select.Option>
+                                <Form.Item label="Select" className={styles.homepageTypeExpense}>
+                                    <Select>
+                                        <Select.Option value="demo">Food &amp; Drinks</Select.Option>
+                                        <Select.Option value="demo">Shopping</Select.Option>
+                                        <Select.Option value="demo">Housing &amp; Utilities</Select.Option>
+                                        <Select.Option value="demo">Vehicle &amp; Transportation</Select.Option>
+                                        <Select.Option value="demo">Communication &amp; PC</Select.Option>
+                                        <Select.Option value="demo">Entertainment &amp; Life</Select.Option>
+                                        <Select.Option value="demo">Investments</Select.Option>
 
-                                </Select>
-                            </Form.Item>
+                                    </Select>
+                                </Form.Item>
+                            </div>
 
+                            <div id={styles.secondHomePageItemsRow}>
+                                <Form.Item label="InputNumber" className={styles.homepageTypeAmount}>
+                                    <InputNumber className={styles.homepageTypeAmountInput}/>
+                                </Form.Item>
 
-                            <Form.Item label="DatePicker">
-                                <DatePicker />
-                            </Form.Item>
+                                <Form.Item label="DatePicker" className={styles.homepageTypeDate}>
+                                    <DatePicker />
+                                </Form.Item>
+                            </div>
 
-                            <Form.Item label="Button">
-                                <Button>Button</Button>
+                            <Form.Item >
+                                <Button type="primary" htmlType="submit">
+                                    Submit
+                                </Button>
                             </Form.Item>
                         </Form>
                     </Card>

@@ -18,3 +18,15 @@
     margin: 0 0 20px 0;
     font-size: 30px;
 }
+
+#firstHomePageItemsRow, #secondHomePageItemsRow {
+    display: flex;
+}
+
+.homepageType, .homepageTypeExpense{
+    min-width: 300px;
+}
+
+.homepageTypeAmount, .homepageTypeDate  {
+    min-width: 300px;
+}
