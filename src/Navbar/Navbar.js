@@ -3,6 +3,7 @@ import { Layout, Menu, Breadcrumb } from 'antd';
 import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import LoginPage from '../Login/LoginPage'
 import RegisterPage from '../Register/RegisterPage'
+import HomePage from '../Home/HomePage'
 const { Header, Content, Footer } = Layout;
 
 export default function Navbar() {
@@ -24,7 +25,7 @@ export default function Navbar() {
 
                 <Switch>
                     <Route exact path="/">
-
+                        <HomePage />
                     </Route>
 
                     <Route path="/records">

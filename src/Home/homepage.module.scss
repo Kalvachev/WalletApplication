@@ -1,21 +1,20 @@
-.registerForm {
+.homePageCard {
+    min-width: 700px;
+}
+
+.homePageRow {
+    margin-top: 7%;
+}
+
+.homePageForm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 20px;
 }
 
-.registerHeading {
+.homepageHeading{
     align-self: center;
     margin: 0 0 20px 0;
     font-size: 30px;
-}
-
-.registerCard {
-    min-width: 500px;
-    min-height: 200px;
-}
-
-.registerRow {
-    margin-top: 7%;
 }
