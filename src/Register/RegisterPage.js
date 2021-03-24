@@ -2,7 +2,6 @@ import React from 'react'
 import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './register.module.scss'
 
-
 export default function RegisterPage() {
 
     const formItemLayout = {
