@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import Navbar from './Navbar/Navbar'
 import LoginPage from './Login/LoginPage'
 import RegisterPage from './Register/RegisterPage'
+// import Records from './Records/Records';
 import 'antd/dist/antd.css';
 
 function App() {

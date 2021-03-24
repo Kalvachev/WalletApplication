@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 import LoginPage from '../Login/LoginPage'
 import RegisterPage from '../Register/RegisterPage'
 import HomePage from '../Home/HomePage'
+import Records from '../Records/Records';
+
 const { Header, Content, Footer } = Layout;
 
 export default function Navbar() {
@@ -29,6 +31,7 @@ export default function Navbar() {
                     </Route>
 
                     <Route path="/records">
+                        <Records/>
                     </Route>
 
                     <Route path="/analytics">

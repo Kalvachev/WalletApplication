@@ -74,11 +74,11 @@ export default function HomePageForm() {
                             </div>
 
                             <div id={styles.secondHomePageItemsRow}>
-                                <Form.Item label="InputNumber" className={styles.homepageTypeAmount}>
+                                <Form.Item label="Amount" className={styles.homepageTypeAmount}>
                                     <InputNumber className={styles.homepageTypeAmountInput}/>
                                 </Form.Item>
 
-                                <Form.Item label="DatePicker" className={styles.homepageTypeDate}>
+                                <Form.Item label="Date" className={styles.homepageTypeDate}>
                                     <DatePicker />
                                 </Form.Item>
                             </div>
