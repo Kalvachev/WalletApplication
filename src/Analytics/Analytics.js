@@ -5,6 +5,9 @@ import AnalyticsList from './AnalyticsList'
 export default function Analytics() {
 
     return (
-        <AnalyticsFilters />
+        <>
+            <AnalyticsFilters />
+            <AnalyticsList />
+        </>
     )
 }
