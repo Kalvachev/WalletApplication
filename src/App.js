@@ -9,6 +9,7 @@ import HomePage from './Home/HomePage'
 import Records from './Records/Records';
 
 import 'antd/dist/antd.css';
+import Analytics from './Analytics/Analytics';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             </Route>
 
             <Route path="/analytics">
+              <Analytics />
             </Route>
 
             <Route path="/login">
