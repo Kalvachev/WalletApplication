@@ -1,3 +1,21 @@
-.recordsLeftGraphDoughnut {
-    margin: 100px 0 0 0 ;
+.recordsPageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.recordsLeftGraphDoughnut {
+    margin: 200px 0 0 0 ;
+}
+
+.recordsRightGraphDoughnut {
+    margin: 200px 0 0 0 ;
+}
+
+.recordsCenterGraphLinearContainer {
+    margin: 200px 100px 0 100px ;
+    width: 500px;
+    height: 350px;
+}
+
+
