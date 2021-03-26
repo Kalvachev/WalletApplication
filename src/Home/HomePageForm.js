@@ -11,7 +11,8 @@ import {
     Card,
     Tabs,
     Input,
-    TimePicker
+    TimePicker,
+    Modal
 } from 'antd';
 
 import styles from './homepage.module.scss';
@@ -29,11 +30,24 @@ export default function HomePageForm() {
         rules: [{ type: 'object', required: true, message: 'Please select time!' }],
     };
 
+    const [visible, setVisible] = useState(false);
+
     return (
-        <>
-            <Row type="flex" justify="center" align="middle" className={styles.homePageRow}>
-                <Col>
-                    <Card className={styles.homePageCard}>
+        <div className={styles.modalButtonContainer}>
+            <Button type="primary" onClick={() => setVisible(true)}>
+                + Record
+                </Button>
+
+            <Modal
+                centered
+                visible={visible}
+                onCancel={() => setVisible(false)}
+                width={600}
+                footer={null}
+            >
+
+                <Row type="flex" justify="center" align="middle" className={styles.homePageRow}>
+                    <Col>
                         <Form
                             className={styles.homePageForm}
                             labelCol={{
@@ -104,9 +118,9 @@ export default function HomePageForm() {
                                 </div>
                             </div>
                         </Form>
-                    </Card>
-                </Col>
-            </Row>
-        </>
+                    </Col>
+                </Row>
+            </Modal>
+        </div>
     )
 }
