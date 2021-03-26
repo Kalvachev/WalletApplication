@@ -1,25 +1,29 @@
 import React from 'react'
 import { Line, Doughnut, defaults } from 'react-chartjs-2';
 import { Form, Input, Button, Row, Col, Card } from 'antd';
+import { data } from '../data'
 
 import styles from './records.module.scss'
 
 defaults.global.tooltips.enabled = false
 defaults.global.legend.position = 'bottom'
 
+const set = new Set(data.map(d => d.date));
+
 export default function Records() {
     return (
         <div className={styles.recordsPageContainer}>
             {/* Left Graph Doughnut */}
             <div className={styles.recordsLeftGraphDoughnut}>
+                <h2>Income</h2>
                 <Card>
                     <Doughnut
                         data={{
-                            labels: ['Red', 'Yellow', 'Blue'],
+                            labels: data.filter(data => data.type == "Income").map(data => data.title),
                             datasets: [
                                 {
                                     label: '# of votes',
-                                    data: [10, 20, 30],
+                                    data: data.filter(data => data.type == "Income").map(data => data.money),
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.2)',
                                         'rgba(54, 162, 235, 0.2)',
@@ -36,7 +40,7 @@ export default function Records() {
                                         'rgba(153, 102, 255, 1)',
                                         'rgba(255, 159, 64, 1)',
                                     ],
-                                    borderWidth: 2,
+                                    borderWidth: 1,
                                 },
                             ],
                         }}
@@ -51,45 +55,49 @@ export default function Records() {
 
             {/* Center Graph Line */}
             <div className={styles.recordsCenterGraphLinearContainer}>
-                    <Line className={styles.recordsCenterGraphLinear}
-                        data={{
-                            labels: ["January", "February", "March", "April", "May", "June", "July"],
-                            datasets: [
-                                {
-                                    label: "My total balance",
-                                    fill: false,
-                                    lineTension: 0.1,
-                                    backgroundColor: "rgba(75, 192, 192, 0.4)",
-                                    borderColor: "rgba(75, 192, 192, 1)",
-                                    borderCapStyle: 'butt',
-                                    borderDash: [],
-                                    borderDashOffset: 0.0,
-                                    borderJoinStyle: 'miter',
-                                    pointBorderColor: "rgba(75,192,192,1)",
-                                    pointBackgroundColor: "#fff",
-                                    pointBorderWidth: 1,
-                                    pointHoverRadius: 5,
-                                    pointHitRadius: 10,
-                                    data: [65, 59, 80, 81, 56, 55, 40],
-                                }
-                            ]
-                        }}
-                        options={{
-                            maintainAspectRatio: false,
-                        }}
-                    />
+                <h2>Hello user, your balance is: {data.reduce((acc, curr) => acc + curr.money, 0)}$</h2>
+
+                <Line className={styles.recordsCenterGraphLinear}
+                    data={{
+                        labels: Array.from(set),
+                        datasets: [
+                            {
+                                label: "My total balance",
+                                fill: false,
+                                lineTension: 0.1,
+                                backgroundColor: "rgba(75, 192, 192, 0.4)",
+                                borderColor: "rgba(75, 192, 192, 1)",
+                                borderCapStyle: 'butt',
+                                borderDash: [],
+                                borderDashOffset: 0.0,
+                                borderJoinStyle: 'miter',
+                                pointBorderColor: "rgba(75,192,192,1)",
+                                pointBackgroundColor: "#fff",
+                                pointBorderWidth: 1,
+                                pointHoverRadius: 5,
+                                pointHitRadius: 10,
+                                data: data.map(d => d.money),
+                            }
+                        ]
+                    }}
+                    options={{
+                        maintainAspectRatio: false,
+                    }}
+                />
             </div>
 
             {/* Right Graph Doughnut */}
             <div className={styles.recordsRightGraphDoughnut}>
+                <h2>Expense</h2>
+
                 <Card>
                     <Doughnut
                         data={{
-                            labels: ['Red', 'Yellow', 'Blue'],
+                            labels: data.filter(data => data.type == "Expense").map(data => data.title),
                             datasets: [
                                 {
                                     label: '# of votes',
-                                    data: [10, 20, 30],
+                                    data: data.filter(data => data.type == "Expense").map(data => data.money),
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.2)',
                                         'rgba(54, 162, 235, 0.2)',
@@ -106,7 +114,7 @@ export default function Records() {
                                         'rgba(153, 102, 255, 1)',
                                         'rgba(255, 159, 64, 1)',
                                     ],
-                                    borderWidth: 2,
+                                    borderWidth: 1,
                                 },
                             ],
                         }}

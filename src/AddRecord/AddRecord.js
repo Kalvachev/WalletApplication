@@ -85,6 +85,10 @@ export default function AddRecord() {
                             </div>
 
                             <div id={styles.bottomRecordsPart}>
+                                <Form.Item label="Title" className={styles.homepageTypeDate}>
+                                    <Input style={{ width: "310px" }} />
+                                </Form.Item>
+
                                 <Form.Item
                                     label="Category"
                                     name="category"

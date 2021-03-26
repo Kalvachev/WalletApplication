@@ -6,8 +6,6 @@
 
 .analyticsList {
     width: 1000px;
-    margin-left: 60px;
-    padding: 10px;
 }
 
 .priceContainer{
@@ -17,4 +15,15 @@
 
 .time {
     margin-left: 15px;
+}
+
+.analyticsListContainer {
+    margin-left: 60px;
+    padding: 15px 30px;
+    background-color: white;
+    border-radius: 15px;
+}
+
+.analyticsMenu {
+    border-radius: 15px;
 }

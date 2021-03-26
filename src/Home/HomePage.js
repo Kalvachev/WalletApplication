@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import CardContent from "./CardContent";
+import CardContent from "./grid";
 import styles from "./homepage.module.scss"
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
@@ -21,12 +21,12 @@ export default class HomePage extends Component {
   }
   render() {
     var layout = [
-      { i: "a", x: 0, y: 0, w: 4, h: 1 },
-      { i: "b", x: 4, y: 0, w: 4, h: 1 },
-      { i: "c", x: 8, y: 0, w: 4, h: 1 },
-      { i: "d", x: 0, y: 1, w: 4, h: 1 },
-      { i: "e", x: 4, y: 1, w: 4, h: 1 },
-      { i: "f", x: 8, y: 1, w: 4, h: 1 },
+      { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4 },
+      { i: "b", x: 4, y: 0, w: 4, h: 1, minW: 4, maxW: 4 },
+      { i: "c", x: 8, y: 0, w: 4, h: 1, minW: 4, maxW: 4 },
+      { i: "d", x: 0, y: 1, w: 4, h: 1, minW: 4, maxW: 4 },
+      { i: "e", x: 4, y: 1, w: 4, h: 1, minW: 4, maxW: 4 },
+      { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4 },
     ];
     var layout1 = [
       { i: "a", x: 0, y: 0, w: 6, h: 1 },
