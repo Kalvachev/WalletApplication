@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, Avatar } from 'antd';
-import styles from './analyticsList.module.scss'
+import styles from './analytics.module.scss'
 
 const data = [
     {

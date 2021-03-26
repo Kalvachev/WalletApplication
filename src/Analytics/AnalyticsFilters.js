@@ -1,8 +1,7 @@
 import React from 'react'
 import { Menu } from 'antd';
 import { DollarOutlined, HistoryOutlined } from '@ant-design/icons';
-import styles from './analyticsFilters.module.scss'
-
+import styles from './analytics.module.scss';
 
 const { SubMenu } = Menu;
 
