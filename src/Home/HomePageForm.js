@@ -10,7 +10,8 @@ import {
     Col,
     Card,
     Tabs,
-    Input
+    Input,
+    TimePicker
 } from 'antd';
 
 import styles from './homepage.module.scss';
@@ -22,6 +23,10 @@ export default function HomePageForm() {
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
+    };
+
+    const config = {
+        rules: [{ type: 'object', required: true, message: 'Please select time!' }],
     };
 
     return (
@@ -56,6 +61,7 @@ export default function HomePageForm() {
                                             <InputNumber />
                                         </Form.Item>
                                     </TabPane>
+
                                     <TabPane tab="Income" key="2" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
                                             <InputNumber className={styles.homepageTypeAmountInput} />
@@ -68,9 +74,9 @@ export default function HomePageForm() {
                                 <Form.Item
                                     label="Category"
                                     name="category"
-                                    style={{ width: "530px" }}
                                     className={styles.homepageTypeExpense}>
-                                    <Select>
+
+                                    <Select style={{ width: "310px" }} >
                                         <Select.Option value="demo">Food &amp; Drinks</Select.Option>
                                         <Select.Option value="demo">Shopping</Select.Option>
                                         <Select.Option value="demo">Housing &amp; Utilities</Select.Option>
@@ -81,18 +87,12 @@ export default function HomePageForm() {
                                     </Select>
                                 </Form.Item>
 
-                                <Form.Item
-                                    label="Notes"
-                                    name="notes"
-                                    className={styles.homepageNotes}
-                                    style={{ width: "530px" }}
-                                >
-                                    <Input />
+                                <Form.Item label="Date" className={styles.homepageTypeDate}>
+                                    <DatePicker style={{ width: "310px" }} />
                                 </Form.Item>
 
-                                <Form.Item label="Date" className={styles.homepageTypeDate}>
-                                    <DatePicker 
-                                    style={{ width: "310px" }}/>
+                                <Form.Item label="Time" {...config}>
+                                    <TimePicker style={{ width: "310px" }} />
                                 </Form.Item>
 
                                 <div className={styles.addRecordsButtonContainer}>
@@ -102,11 +102,7 @@ export default function HomePageForm() {
                                         </Button>
                                     </Form.Item>
                                 </div>
-
                             </div>
-
-
-
                         </Form>
                     </Card>
                 </Col>
