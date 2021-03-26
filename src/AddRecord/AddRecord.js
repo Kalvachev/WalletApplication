@@ -15,11 +15,11 @@ import {
     Modal
 } from 'antd';
 
-import styles from './homepage.module.scss';
+import styles from './addrecord.module.scss';
 
 const { TabPane } = Tabs;
 
-export default function HomePageForm() {
+export default function AddRecord() {
     const [componentSize, setComponentSize] = useState('default');
 
     const onFormLayoutChange = ({ size }) => {

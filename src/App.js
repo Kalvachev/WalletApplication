@@ -7,9 +7,13 @@ import LoginPage from './Login/LoginPage'
 import RegisterPage from './Register/RegisterPage'
 import HomePage from './Home/HomePage'
 import Records from './Records/Records';
+import AddRecord from './AddRecord/AddRecord';
+import Analytics from './Analytics/Analytics';
 
 import 'antd/dist/antd.css';
-import Analytics from './Analytics/Analytics';
+
+import "../node_modules/react-grid-layout/css/styles.css";
+import "../node_modules/react-resizable/css/styles.css";
 
 function App() {
   return (
@@ -20,6 +24,7 @@ function App() {
 
           <Switch>
             <Route exact path="/">
+              <AddRecord/>
               <HomePage />
             </Route>
 
