@@ -2,22 +2,20 @@ import React, { useState } from 'react';
 
 import {
     Form,
-    Input,
     Button,
-    Radio,
     Select,
-    Cascader,
     DatePicker,
     InputNumber,
-    TreeSelect,
-    Switch,
     Row,
     Col,
-    Card
+    Card,
+    Tabs,
+    Input
 } from 'antd';
 
 import styles from './homepage.module.scss';
 
+const { TabPane } = Tabs;
 
 export default function HomePageForm() {
     const [componentSize, setComponentSize] = useState('default');
@@ -34,7 +32,7 @@ export default function HomePageForm() {
                         <Form
                             className={styles.homePageForm}
                             labelCol={{
-                                span: 4,
+                                span: 3,
                             }}
                             wrapperCol={{
                                 span: 14,
@@ -46,20 +44,32 @@ export default function HomePageForm() {
                             onValuesChange={onFormLayoutChange}
                             size={componentSize}
                         >
-                            <h2 className={styles.homepageHeading}>
+                            {/* <h2 className={styles.homepageHeading}>
                                 Hello, username!
                                 Your Balance is 0$
-                            </h2>
+                            </h2> */}
 
-                            <div id={styles.firstHomePageItemsRow}>
-                                <Form.Item label="Type" className={styles.homepageType}>
-                                    <Select>
-                                        <Select.Option value="income">Income</Select.Option>
-                                        <Select.Option value="expense">Expense</Select.Option>
-                                    </Select>
-                                </Form.Item>
+                            <div className={styles.topRecordsPart}>
+                                <Tabs type="card">
+                                    <TabPane tab="Expense" key="1" className={styles.expenseTab}>
+                                        <Form.Item label="Amount" className={styles.homepageTypeAmount}>
+                                            <InputNumber />
+                                        </Form.Item>
+                                    </TabPane>
+                                    <TabPane tab="Income" key="2" className={styles.expenseTab}>
+                                        <Form.Item label="Amount" className={styles.homepageTypeAmount}>
+                                            <InputNumber className={styles.homepageTypeAmountInput} />
+                                        </Form.Item>
+                                    </TabPane>
+                                </Tabs>
+                            </div>
 
-                                <Form.Item label="Select" className={styles.homepageTypeExpense}>
+                            <div id={styles.bottomRecordsPart}>
+                                <Form.Item
+                                    label="Category"
+                                    name="category"
+                                    style={{ width: "530px" }}
+                                    className={styles.homepageTypeExpense}>
                                     <Select>
                                         <Select.Option value="demo">Food &amp; Drinks</Select.Option>
                                         <Select.Option value="demo">Shopping</Select.Option>
@@ -68,26 +78,35 @@ export default function HomePageForm() {
                                         <Select.Option value="demo">Communication &amp; PC</Select.Option>
                                         <Select.Option value="demo">Entertainment &amp; Life</Select.Option>
                                         <Select.Option value="demo">Investments</Select.Option>
-
                                     </Select>
                                 </Form.Item>
-                            </div>
 
-                            <div id={styles.secondHomePageItemsRow}>
-                                <Form.Item label="Amount" className={styles.homepageTypeAmount}>
-                                    <InputNumber className={styles.homepageTypeAmountInput}/>
+                                <Form.Item
+                                    label="Notes"
+                                    name="notes"
+                                    className={styles.homepageNotes}
+                                    style={{ width: "530px" }}
+                                >
+                                    <Input />
                                 </Form.Item>
 
                                 <Form.Item label="Date" className={styles.homepageTypeDate}>
-                                    <DatePicker />
+                                    <DatePicker 
+                                    style={{ width: "310px" }}/>
                                 </Form.Item>
+
+                                <div className={styles.addRecordsButtonContainer}>
+                                    <Form.Item>
+                                        <Button type="primary" htmlType="submit" className={styles.addRecordsButton}>
+                                            Add record
+                                        </Button>
+                                    </Form.Item>
+                                </div>
+
                             </div>
 
-                            <Form.Item >
-                                <Button type="primary" htmlType="submit">
-                                    Submit
-                                </Button>
-                            </Form.Item>
+
+
                         </Form>
                     </Card>
                 </Col>

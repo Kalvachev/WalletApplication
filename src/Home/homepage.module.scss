@@ -1,5 +1,6 @@
 .homePageCard {
-    min-width: 700px;
+    width: 600px;
+    height: 600px;
 }
 
 .homePageRow {
@@ -13,20 +14,60 @@
     padding: 20px;
 }
 
-.homepageHeading{
+.homepageHeading {
     align-self: center;
-    margin: 0 0 20px 0;
+    margin: 0 0 50px 0;
     font-size: 30px;
 }
 
-#firstHomePageItemsRow, #secondHomePageItemsRow {
+.homepageTypeAmount {
+    justify-content: center;
+}
+
+// ----------------------------------
+
+:global(.ant-tabs-nav-wrap) {
     display: flex;
+    justify-content: center;
 }
 
-.homepageType, .homepageTypeExpense{
-    min-width: 350px;
+:global(.ant-tabs-tab) {
+    display: flex;
+    justify-content: center;
+    width: 8rem;
+    height: 2rem;
 }
 
-.homepageTypeAmount, .homepageTypeDate  {
-    min-width: 350px;
+:global(.ant-form-item-label) {
+    margin-left: 5rem;
+    padding-right: 5rem;
 }
+
+.expenseTab {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.topRecordsPart {
+    margin:30px 0 70px 0;
+}
+
+.bottomRecordsPart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.addRecordsButtonContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.addRecordsButton {
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    margin: 40px 0;
+}
+
