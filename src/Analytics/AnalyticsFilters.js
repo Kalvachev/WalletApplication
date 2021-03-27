@@ -21,7 +21,6 @@ export default function AnalyticsFilters() {
                 className={styles.analyticsMenu}
             >
                 <SubMenu key="sub1" icon={<HistoryOutlined />} title="RECORD TYPES">
-
                     <Menu.Item key="1">All Record Types</Menu.Item>
                     <Menu.Item key="2">Income</Menu.Item>
                     <Menu.Item key="3">Expense</Menu.Item>
