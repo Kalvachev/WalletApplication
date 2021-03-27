@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './register.module.scss'
+import { useAuth } from '../contexts/AuthContext'
 
 export default function RegisterPage() {
+    const usernameRef = useRef();
+    const emailRef = useRef();
+    const passRef = useRef();
+    const passConfirmRef = useRef();
+    const signUp = useAuth();
 
     const formItemLayout = {
         labelCol: {
@@ -37,6 +43,11 @@ export default function RegisterPage() {
 
     const [form] = Form.useForm();
 
+    function handleSubmit(e) {
+        e.preventDefault();
+
+        signUp(usernameRef.current.value, passRef.current.value)
+    }
     return (
         <>
             <Row type="flex" justify="center" align="middle" className={styles.registerRow}>
@@ -51,6 +62,7 @@ export default function RegisterPage() {
                             <h2 className={styles.registerHeading}>Register</h2>
 
                             <Form.Item
+                                ref={usernameRef}
                                 name="nickname"
                                 label="Nickname"
                                 tooltip="What do you want others to call you?"
@@ -67,6 +79,7 @@ export default function RegisterPage() {
 
 
                             <Form.Item
+                                ref={emailRef}
                                 name="email"
                                 label="E-mail"
                                 rules={[
@@ -84,6 +97,7 @@ export default function RegisterPage() {
                             </Form.Item>
 
                             <Form.Item
+                                ref={passRef}
                                 name="password"
                                 label="Password"
                                 rules={[
@@ -98,6 +112,7 @@ export default function RegisterPage() {
                             </Form.Item>
 
                             <Form.Item
+                                ref={passConfirmRef}
                                 name="confirm"
                                 label="Confirm Password"
                                 dependencies={['password']}

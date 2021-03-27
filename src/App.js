@@ -14,17 +14,18 @@ import 'antd/dist/antd.css';
 
 import "../node_modules/react-grid-layout/css/styles.css";
 import "../node_modules/react-resizable/css/styles.css";
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
   return (
-    <>
+    <AuthProvider>
       <div className="App">
         <BrowserRouter>
           <Navbar />
-          
+
           <Switch>
             <Route exact path="/">
-              <AddRecord/>
+              <AddRecord />
               <HomePage />
             </Route>
 
@@ -49,7 +50,7 @@ function App() {
           </Switch>
         </BrowserRouter>
       </div>
-    </>
+    </AuthProvider>
   );
 }
 
