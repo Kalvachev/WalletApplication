@@ -1,78 +1,78 @@
 import React, { Component } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import CardContent from "./grid";
+import CardContent from "./CardContent";
 import styles from "./homepage.module.scss"
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 export default class HomePage extends Component {
-  constructor() {
-    super();
-    this.state = {
-      value: true,
-    };
-    this.onHandle = this.onHandle.bind(this);
-  }
-  onHandle() {
-    this.setState((prevState) => ({
-      value: !prevState.value,
-    }));
-  }
-  render() {
-    var layout = [
-      { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4 },
-      { i: "b", x: 4, y: 0, w: 4, h: 1, minW: 4, maxW: 4 },
-      { i: "c", x: 8, y: 0, w: 4, h: 1, minW: 4, maxW: 4 },
-      { i: "d", x: 0, y: 1, w: 4, h: 1, minW: 4, maxW: 4 },
-      { i: "e", x: 4, y: 1, w: 4, h: 1, minW: 4, maxW: 4 },
-      { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4 },
-    ];
-    var layout1 = [
-      { i: "a", x: 0, y: 0, w: 6, h: 1 },
-      { i: "b", x: 6, y: 0, w: 6, h: 1 },
-      { i: "c", x: 0, y: 1, w: 6, h: 1 },
-      { i: "d", x: 6, y: 1, w: 6, h: 1 },
-      { i: "e", x: 0, y: 2, w: 6, h: 1 },
-      { i: "f", x: 6, y: 2, w: 6, h: 1 },
-    ];
+    constructor() {
+        super();
+        this.state = {
+            value: true,
+        };
+        this.onHandle = this.onHandle.bind(this);
+    }
+    onHandle() {
+        this.setState((prevState) => ({
+            value: !prevState.value,
+        }));
+    }
+    render() {
+        var layout = [
+            { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
+            { i: "b", x: 4, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
+            { i: "c", x: 8, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
+            { i: "d", x: 0, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
+            { i: "e", x: 4, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
+            { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
+        ];
+        var layout1 = [
+            { i: "a", x: 0, y: 0, w: 6, h: 1 },
+            { i: "b", x: 6, y: 0, w: 6, h: 1 },
+            { i: "c", x: 0, y: 1, w: 6, h: 1 },
+            { i: "d", x: 6, y: 1, w: 6, h: 1 },
+            { i: "e", x: 0, y: 2, w: 6, h: 1 },
+            { i: "f", x: 6, y: 2, w: 6, h: 1 },
+        ];
 
-    var layout = { lg: this.state.value === true ? layout : layout1 };
+        var layout = { lg: this.state.value === true ? layout : layout1 };
 
-    return (
-      <div className={styles.gridContainer}>
-        <button style={{ marginLeft: "45%" }} onClick={this.onHandle}>
-          {this.state.value === true ? "Increase" : "Decrease"} Grid by 2
+        return (
+            <div className={styles.gridContainer}>
+                <button style={{ marginLeft: "45%" }} onClick={this.onHandle}>
+                    {this.state.value === true ? "Increase" : "Decrease"} Grid by 2
           columns
         </button>
-        <ResponsiveGridLayout
-          className="layout"
-          layouts={layout}
-          breakpoints={{ lg: 1200 }}
-          cols={{ lg: 12 }}
-          rowHeight={281}
-          width={1200}
-        >
-          <div key="a" style={{ backgroundColor: "yellow" }}>
-            <CardContent color={"yellow"} />
-          </div>
-          <div key="b" style={{ backgroundColor: "green" }}>
-            <CardContent color={"green"} />
-          </div>
-          <div key="c" style={{ backgroundColor: "red" }}>
-            <CardContent color={"red"} />
-          </div>
-          <div key="d" style={{ backgroundColor: "blue" }}>
-            <CardContent color={"blue"} />
-          </div>
-          <div key="e" style={{ backgroundColor: "violet" }}>
-            <CardContent color={"violet"} />
-          </div>
-         <div key="f" style={{ backgroundColor: "lemonchiffon" }}>
-            <CardContent color={"lemonchiffon"} />
-          </div>
-        </ResponsiveGridLayout>
-      </div>
-    );
-  }
+                <ResponsiveGridLayout
+                    className="layout"
+                    layouts={layout}
+                    breakpoints={{ lg: 1200 }}
+                    cols={{ lg: 12 }}
+                    rowHeight={281}
+                    width={1200}
+                >
+                    <div key="a" style={{ backgroundColor: "yellow" }}>
+                        <CardContent color={"yellow"} />
+                    </div>
+                    <div key="b" style={{ backgroundColor: "green" }}>
+                        <CardContent color={"green"} />
+                    </div>
+                    <div key="c" style={{ backgroundColor: "red" }}>
+                        <CardContent color={"red"} />
+                    </div>
+                    <div key="d" style={{ backgroundColor: "blue" }}>
+                        <CardContent color={"blue"} />
+                    </div>
+                    <div key="e" style={{ backgroundColor: "violet" }}>
+                        <CardContent color={"violet"} />
+                    </div>
+                    <div key="f" style={{ backgroundColor: "lemonchiffon" }}>
+                        <CardContent color={"lemonchiffon"} />
+                    </div>
+                </ResponsiveGridLayout>
+            </div>
+        );
+    }
 }
