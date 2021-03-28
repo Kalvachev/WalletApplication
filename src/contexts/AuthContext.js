@@ -11,9 +11,8 @@ export function AuthProvider({ children }) {
     const [currentUser, setCurrentUser] = useState();
 
 
-
-    function signUp(username, password) {
-        firebase.auth().createUserWithEmailAndPassword(username, password)
+    function signUp(email, password) {
+        firebase.auth().createUserWithEmailAndPassword(email, password)
     }
 
     useEffect(() => {

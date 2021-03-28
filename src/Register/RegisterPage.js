@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { Form, Input, Button, Row, Col, Card } from 'antd';
+import React, { useRef, useState } from 'react'
+import { Form, Input, Button, Row, Col, Card, Alert } from 'antd';
 import styles from './register.module.scss'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -8,7 +8,9 @@ export default function RegisterPage() {
     const emailRef = useRef();
     const passRef = useRef();
     const passConfirmRef = useRef();
-    const signUp = useAuth();
+    const { signUp, currentUser } = useAuth();
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const formItemLayout = {
         labelCol: {
@@ -45,15 +47,35 @@ export default function RegisterPage() {
 
     function handleSubmit(e) {
         e.preventDefault();
+        console.log('submitting')
+        if (passRef.current.value !== passConfirmRef.current.value) {
+            return setError('Passwords do not match')
+        }
 
-        signUp(emailRef.current.value, passRef.current.value)
+        try {
+            setError('')
+            setLoading(true)
+            signUp(emailRef.current.value, passRef.current.value)
+            console.log('success')
+        } catch {
+            setError('Failed to create an account')
+            console.log(error)
+        }
+        console.log('error2')
+
+        setLoading(false);
     }
+
     return (
         <>
             <Row type="flex" justify="center" align="middle" className={styles.registerRow}>
                 <Col>
                     <Card className={styles.registerCard} >
-                        <Form className={styles.registerForm}
+                        {currentUser}
+                        {error && <Alert type="error">{error}</Alert>}
+                        <Form
+                            // onSubmit={handleSubmit}
+                            className={styles.registerForm}
                             {...formItemLayout}
                             form={form}
                             name="register"
@@ -62,7 +84,6 @@ export default function RegisterPage() {
                             <h2 className={styles.registerHeading}>Register</h2>
 
                             <Form.Item
-                                ref={usernameRef}
                                 name="nickname"
                                 label="Nickname"
                                 tooltip="What do you want others to call you?"
@@ -74,12 +95,12 @@ export default function RegisterPage() {
                                     },
                                 ]}
                             >
-                                <Input />
+
+                                <Input ref={usernameRef} />
                             </Form.Item>
 
 
                             <Form.Item
-                                ref={emailRef}
                                 name="email"
                                 label="E-mail"
                                 rules={[
@@ -93,11 +114,10 @@ export default function RegisterPage() {
                                     },
                                 ]}
                             >
-                                <Input />
+                                <Input ref={emailRef} />
                             </Form.Item>
 
                             <Form.Item
-                                ref={passRef}
                                 name="password"
                                 label="Password"
                                 rules={[
@@ -108,11 +128,10 @@ export default function RegisterPage() {
                                 ]}
                                 hasFeedback
                             >
-                                <Input.Password />
+                                <Input.Password ref={passRef} />
                             </Form.Item>
 
                             <Form.Item
-                                ref={passConfirmRef}
                                 name="confirm"
                                 label="Confirm Password"
                                 dependencies={['password']}
@@ -133,11 +152,11 @@ export default function RegisterPage() {
                                     }),
                                 ]}
                             >
-                                <Input.Password />
+                                <Input.Password ref={passConfirmRef} />
 
                             </Form.Item>
                             <Form.Item {...tailFormItemLayout}>
-                                <Button type="primary" htmlType="submit" onClick={handleSubmit}>
+                                <Button disabled={loading} onClick={handleSubmit} type="primary" htmlType="submit">
                                     Register
                                 </Button>
                             </Form.Item>
