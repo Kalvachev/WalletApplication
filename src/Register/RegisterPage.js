@@ -46,7 +46,7 @@ export default function RegisterPage() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        signUp(usernameRef.current.value, passRef.current.value)
+        signUp(emailRef.current.value, passRef.current.value)
     }
     return (
         <>
