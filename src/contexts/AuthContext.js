@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import firebase from 'firebase/app'
 import auth from '../firebase'
 
 const AuthContext = React.createContext();
@@ -25,7 +26,7 @@ export function AuthProvider({ children }) {
     }, [])
     const value = {
         currentUser,
-        signup
+        signUp
     }
 
     return (

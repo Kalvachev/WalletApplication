@@ -137,7 +137,7 @@ export default function RegisterPage() {
 
                             </Form.Item>
                             <Form.Item {...tailFormItemLayout}>
-                                <Button type="primary" htmlType="submit">
+                                <Button type="primary" htmlType="submit" onClick={handleSubmit}>
                                     Register
                                 </Button>
                             </Form.Item>
