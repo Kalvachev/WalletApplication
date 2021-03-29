@@ -8,9 +8,10 @@ export default function RegisterPage() {
     const emailRef = useRef();
     const passRef = useRef();
     const passConfirmRef = useRef();
-    const { signUp, currentUser } = useAuth();
+    const { signUp } = useAuth();
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
 
     const formItemLayout = {
         labelCol: {
@@ -71,8 +72,6 @@ export default function RegisterPage() {
             <Row type="flex" justify="center" align="middle" className={styles.registerRow}>
                 <Col>
                     <Card className={styles.registerCard} >
-                        {/* {currentUser.email} */}
-                        {error && <Alert type="error">{error}</Alert>}
                         <Form
                             // onSubmit={handleSubmit}
                             className={styles.registerForm}

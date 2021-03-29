@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from './Navbar/Navbar'
 import LoginPage from './Login/LoginPage'
 import RegisterPage from './Register/RegisterPage'
-import HomePage from './Home/HomePage'
+import { GridLayout } from './Home/GridLayout'
 import Records from './Records/Records';
 import AddRecord from './AddRecord/AddRecord';
 import Analytics from './Analytics/Analytics';
@@ -26,7 +26,7 @@ function App() {
           <Switch>
             <Route exact path="/">
               <AddRecord />
-              <HomePage />
+              <GridLayout />
             </Route>
 
             <Route path="/records">

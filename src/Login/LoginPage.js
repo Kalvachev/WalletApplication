@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Form, Input, Button, Checkbox, Row, Col, Card } from 'antd';
 import styles from './login.module.scss'
+import { useAuth } from '../contexts/AuthContext'
+import { Link, useHistory } from 'react-router-dom'
 
 export default function LoginPage() {
+    const emailRef = useRef();
+    const passRef = useRef();
+    const { logIn } = useAuth();
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const history = useHistory()
+
     const layout = {
         labelCol: {
             span: 8,
@@ -17,6 +26,24 @@ export default function LoginPage() {
             span: 16,
         },
     };
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log('submitting')
+
+        try {
+            setError('')
+            setLoading(true)
+            logIn(emailRef.current.state.value, passRef.current.state.value)
+            console.log('success')
+            history.push('/')
+        } catch {
+            setError('Failed to log in')
+            console.log(error)
+        }
+
+        setLoading(false);
+    }
 
     return (
         <Row type="flex" justify="center" align="middle" style={{ minHeight: '100%' }} className={styles.loginRow}>
@@ -33,16 +60,16 @@ export default function LoginPage() {
                         <h2 className={styles.loginHeading}>Login</h2>
 
                         <Form.Item
-                            label="Username"
-                            name="username"
+                            label="Email"
+                            name="email"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your username!',
+                                    message: 'Please input your email!',
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input ref={emailRef} />
                         </Form.Item>
 
                         <Form.Item
@@ -55,7 +82,7 @@ export default function LoginPage() {
                                 },
                             ]}
                         >
-                            <Input.Password />
+                            <Input.Password ref={passRef} />
                         </Form.Item>
 
                         <Form.Item {...tailLayout} name="remember" valuePropName="checked">
@@ -63,10 +90,13 @@ export default function LoginPage() {
                         </Form.Item>
 
                         <Form.Item {...tailLayout}>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-            </Button>
+                            <Button disabled={loading} onClick={handleSubmit} type="primary" htmlType="submit">
+                                Log In
+                            </Button>
                         </Form.Item>
+                        <div>
+                            Need an account? <Link to='/register'>Sign Up</Link>
+                        </div>
                     </Form>
                 </Card>
             </Col>
