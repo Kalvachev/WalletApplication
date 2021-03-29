@@ -22,6 +22,7 @@ export default function Navbar() {
             setError("Failed to log out")
         }
     }
+
     return (
         <>
             <Layout>
@@ -33,7 +34,7 @@ export default function Navbar() {
                         <Menu.Item key="3"><Link to="/analytics">Analytics</Link></Menu.Item>
                         <Menu.Item key="4"><Link to="/login">Login</Link></Menu.Item>
                         <Menu.Item key="5"><Link to="/register">Register</Link></Menu.Item>
-                        <Menu.Item key="6" onClick={logoutHandler}>Logout</Menu.Item>
+                        <Menu.Item key="6"><Link to="/login" onClick={logoutHandler}>Logout</Link></Menu.Item>
                     </Menu>
                 </Header>
             </Layout>
