@@ -48,14 +48,14 @@ export default function RegisterPage() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log('submitting')
-        if (passRef.current.value !== passConfirmRef.current.value) {
+        if (passRef.current.state.value !== passConfirmRef.current.state.value) {
             return setError('Passwords do not match')
         }
 
         try {
             setError('')
             setLoading(true)
-            signUp(emailRef.current.value, passRef.current.value)
+            signUp(emailRef.current.state.value, passRef.current.state.value)
             console.log('success')
         } catch {
             setError('Failed to create an account')
@@ -71,7 +71,7 @@ export default function RegisterPage() {
             <Row type="flex" justify="center" align="middle" className={styles.registerRow}>
                 <Col>
                     <Card className={styles.registerCard} >
-                        {currentUser}
+                        {/* {currentUser.email} */}
                         {error && <Alert type="error">{error}</Alert>}
                         <Form
                             // onSubmit={handleSubmit}
