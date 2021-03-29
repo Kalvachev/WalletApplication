@@ -64,8 +64,8 @@ export default function LoginPage() {
 
                         <Form.Item {...tailLayout}>
                             <Button type="primary" htmlType="submit">
-                                Submit
-            </Button>
+                                Login
+                            </Button>
                         </Form.Item>
                     </Form>
                 </Card>
