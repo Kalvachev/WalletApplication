@@ -9,11 +9,13 @@ import { GridLayout } from './Home/GridLayout'
 import Records from './Records/Records';
 import AddRecord from './AddRecord/AddRecord';
 import Analytics from './Analytics/Analytics';
+import AddStartIncome from './AddStartIncome/AddStartIncome';
 
 import 'antd/dist/antd.css';
 
 import "../node_modules/react-grid-layout/css/styles.css";
 import "../node_modules/react-resizable/css/styles.css";
+
 import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
@@ -39,6 +41,7 @@ function App() {
 
             <Route path="/login">
               <LoginPage />
+              <AddStartIncome/>
             </Route>
 
             <Route path="/register">
