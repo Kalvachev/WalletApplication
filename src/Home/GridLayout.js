@@ -4,18 +4,17 @@ import { Responsive, WidthProvider } from "react-grid-layout";
 import CardContent from "./CardContent";
 import styles from "./homepage.module.scss"
 
-import { Line, Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
-import { Button, List, Progress } from 'antd';
+import { Pie, Doughnut, Bar } from 'react-chartjs-2';
+import { List, Progress } from 'antd';
 
 import { data } from '../data'
-import { useAuth } from '../contexts/AuthContext'
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const allExpenses = Math.abs(data.filter(data => data.type === "Expense").reduce(((acc, curr) => acc + curr.money), 0));
 const allIncomes = data.filter(data => data.type === "Income").reduce(((acc, curr) => acc + curr.money), 0);
 
-class GridLayout extends Component {
+export default class GridLayout extends Component {
     constructor() {
         super();
         this.state = {
@@ -207,5 +206,3 @@ class GridLayout extends Component {
         );
     }
 }
-
-export { GridLayout }

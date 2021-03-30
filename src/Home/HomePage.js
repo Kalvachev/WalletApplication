@@ -1,25 +1,15 @@
-// import React, { useState } from 'react'
-// import { Link, useHistory } from "react-router-dom"
+import React from 'react'
 
-// export default function HomePage() {
+import CardContent from './CardContent'
+import GridLayout from './GridLayout'
 
-//     const [error, setError] = useState("")
-//     const { currentUser, logout } = useAuth()
-//     const history = useHistory()
-
-//     async function handleLogout() {
-//         setError("")
-
-//         try {
-//             await logout()
-//             history.push("/login")
-//         } catch {
-//             setError("Failed to log out")
-//         }
-//     }
-//     return (
-//         <div>
-
-//         </div>
-//     )
-// }
+export default function HomePage() {
+    return (
+        <>
+            <div >
+                <CardContent />
+                <GridLayout />
+            </div>
+        </>
+    )
+}

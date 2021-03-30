@@ -1,7 +1,6 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from 'firebase'
 
-const firebaseConfig ={
+const firebaseConfig = {
     apiKey: "AIzaSyBlLboct0cr6qPbJQRSh8bYHtJKjT7emkM",
     authDomain: "wallet-application-4ad52.firebaseapp.com",
     projectId: "wallet-application-4ad52",
@@ -12,4 +11,10 @@ const firebaseConfig ={
 
 firebase.initializeApp(firebaseConfig)
 
+const database = firebase.firestore();
+const auth = firebase.auth();
+const storage = firebase.storage();
+
 export default firebase;
+
+export { database, auth, storage }

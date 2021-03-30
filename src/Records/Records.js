@@ -1,6 +1,6 @@
 import React from 'react'
 import { Line, Doughnut, defaults } from 'react-chartjs-2';
-import { Form, Input, Button, Row, Col, Card } from 'antd';
+import { Card } from 'antd';
 import { data } from '../data'
 
 import styles from './records.module.scss'

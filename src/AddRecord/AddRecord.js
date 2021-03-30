@@ -95,13 +95,13 @@ export default function AddRecord() {
                                     className={styles.homepageTypeExpense}>
 
                                     <Select style={{ width: "310px" }} >
-                                        <Select.Option value="demo">Food &amp; Drinks</Select.Option>
-                                        <Select.Option value="demo">Shopping</Select.Option>
-                                        <Select.Option value="demo">Housing &amp; Utilities</Select.Option>
-                                        <Select.Option value="demo">Vehicle &amp; Transportation</Select.Option>
-                                        <Select.Option value="demo">Communication &amp; PC</Select.Option>
-                                        <Select.Option value="demo">Entertainment &amp; Life</Select.Option>
-                                        <Select.Option value="demo">Investments</Select.Option>
+                                        <Select.Option value="foodAndDrinks">Food &amp; Drinks</Select.Option>
+                                        <Select.Option value="shopping">Shopping</Select.Option>
+                                        <Select.Option value="housingAndUtilities">Housing &amp; Utilities</Select.Option>
+                                        <Select.Option value="vehicleAndTransportation">Vehicle &amp; Transportation</Select.Option>
+                                        <Select.Option value="communicationAndPC">Communication &amp; PC</Select.Option>
+                                        <Select.Option value="entertainementAndLife">Entertainment &amp; Life</Select.Option>
+                                        <Select.Option value="investments">Investments</Select.Option>
                                     </Select>
                                 </Form.Item>
 

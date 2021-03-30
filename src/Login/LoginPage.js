@@ -1,17 +1,34 @@
-import React, { useState, useRef } from 'react'
-import { Form, Input, Button, Checkbox, Row, Col, Card } from 'antd';
+import React, { useState } from 'react'
+import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './login.module.scss'
-import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import firebase from "../firebase";
+import { loginWithCredentials } from './LoginService';
+import { useHistory } from "react-router-dom";
 
 export default function LoginPage() {
-    const emailRef = useRef();
-    const passRef = useRef();
-    const { logIn } = useAuth();
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const history = useHistory()
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const history = useHistory();
 
+    const onLogin = () => {
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                history.push("/");
+
+                console.log('Successfull login:', user);
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+                setError(error.message);
+            });
+    };
+
+    // Form Layout
     const layout = {
         labelCol: {
             span: 8,
@@ -26,24 +43,6 @@ export default function LoginPage() {
             span: 16,
         },
     };
-
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log('submitting')
-
-        try {
-            setError('')
-            setLoading(true)
-            logIn(emailRef.current.state.value, passRef.current.state.value)
-            console.log('success')
-            history.push('/')
-        } catch {
-            setError('Failed to log in')
-            console.log(error)
-        }
-
-        setLoading(false);
-    }
 
     return (
         <Row type="flex" justify="center" align="middle" style={{ minHeight: '100%' }} className={styles.loginRow}>
@@ -69,7 +68,10 @@ export default function LoginPage() {
                                 },
                             ]}
                         >
-                            <Input ref={emailRef} />
+                            <Input
+                                value={email}
+                                onInput={(ev) => setEmail(ev.target.value)}
+                            />
                         </Form.Item>
 
                         <Form.Item
@@ -82,15 +84,13 @@ export default function LoginPage() {
                                 },
                             ]}
                         >
-                            <Input.Password ref={passRef} />
-                        </Form.Item>
-
-                        <Form.Item {...tailLayout} name="remember" valuePropName="checked">
-                            <Checkbox>Remember me</Checkbox>
+                            <Input.Password
+                                value={password}
+                                onInput={(ev) => setPassword(ev.target.value)} />
                         </Form.Item>
 
                         <Form.Item {...tailLayout}>
-                            <Button disabled={loading} onClick={handleSubmit} type="primary" htmlType="submit">
+                            <Button type="primary" htmlType="submit" onClick={onLogin}>
                                 Log In
                             </Button>
                         </Form.Item>

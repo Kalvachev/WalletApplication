@@ -1,18 +1,53 @@
-import React, { useRef, useState } from 'react'
-import { Form, Input, Button, Row, Col, Card, Alert } from 'antd';
+import React, { useState } from 'react'
+import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './register.module.scss'
-import { useAuth } from '../contexts/AuthContext'
+import { useHistory } from "react-router-dom";
+
+import firebase from "../firebase";
+import { database } from "../firebase";
 
 export default function RegisterPage() {
-    const usernameRef = useRef();
-    const emailRef = useRef();
-    const passRef = useRef();
-    const passConfirmRef = useRef();
-    const { signUp } = useAuth();
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const history = useHistory();
+
+    const onRegister = () => {
+        firebase
+            .auth()
+            .createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                const userUID = userCredential.user.uid;
+
+                database
+                    .collection("users")
+                    .doc(userUID)
+                    .set({
+                        id: userUID,
+                        name: name,
+                        email: email,
+                        bills: [],
+                        // currentMoney:
+                    })
+                    .then(() => {
+                        console.log("Successfully written!");
+                    })
+                    .catch((error) => {
+                        console.error("Error on writing: ", error);
+                    });
+
+                history.push("/login");
+            })
+            .catch((error) => {
+                console.log("Error: ", error);
+                setError(error.message);
+            });
+    };
 
 
+    // Form Layout
     const formItemLayout = {
         labelCol: {
             xs: {
@@ -31,6 +66,7 @@ export default function RegisterPage() {
             },
         },
     };
+
     const tailFormItemLayout = {
         wrapperCol: {
             xs: {
@@ -46,34 +82,12 @@ export default function RegisterPage() {
 
     const [form] = Form.useForm();
 
-    function handleSubmit(e) {
-        e.preventDefault();
-        console.log('submitting')
-        if (passRef.current.state.value !== passConfirmRef.current.state.value) {
-            return setError('Passwords do not match')
-        }
-
-        try {
-            setError('')
-            setLoading(true)
-            signUp(emailRef.current.state.value, passRef.current.state.value)
-            console.log('success')
-        } catch {
-            setError('Failed to create an account')
-            console.log(error)
-        }
-        console.log('error2')
-
-        setLoading(false);
-    }
-
     return (
         <>
             <Row type="flex" justify="center" align="middle" className={styles.registerRow}>
                 <Col>
                     <Card className={styles.registerCard} >
                         <Form
-                            // onSubmit={handleSubmit}
                             className={styles.registerForm}
                             {...formItemLayout}
                             form={form}
@@ -95,9 +109,10 @@ export default function RegisterPage() {
                                 ]}
                             >
 
-                                <Input ref={usernameRef} />
+                                <Input
+                                    value={name}
+                                    onInput={(ev) => setName(ev.target.value)} />
                             </Form.Item>
-
 
                             <Form.Item
                                 name="email"
@@ -113,7 +128,8 @@ export default function RegisterPage() {
                                     },
                                 ]}
                             >
-                                <Input ref={emailRef} />
+                                <Input value={email}
+                                    onInput={(ev) => setEmail(ev.target.value)} />
                             </Form.Item>
 
                             <Form.Item
@@ -127,7 +143,9 @@ export default function RegisterPage() {
                                 ]}
                                 hasFeedback
                             >
-                                <Input.Password ref={passRef} />
+                                <Input.Password
+                                    value={password}
+                                    onInput={(ev) => setPassword(ev.target.value)} />
                             </Form.Item>
 
                             <Form.Item
@@ -151,11 +169,14 @@ export default function RegisterPage() {
                                     }),
                                 ]}
                             >
-                                <Input.Password ref={passConfirmRef} />
+                                <Input.Password
+                                    value={password}
+                                    onInput={(ev) => setPassword(ev.target.value)}
+                                />
 
                             </Form.Item>
                             <Form.Item {...tailFormItemLayout}>
-                                <Button disabled={loading} onClick={handleSubmit} type="primary" htmlType="submit">
+                                <Button type="primary" htmlType="submit" onClick={onRegister}>
                                     Register
                                 </Button>
                             </Form.Item>
