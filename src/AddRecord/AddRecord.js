@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { database } from '../firebase'
+
 import {
     Form,
     Button,
@@ -14,6 +15,7 @@ import {
     TimePicker,
     Modal
 } from 'antd';
+
 import firebase from '../firebase'
 import styles from './addrecord.module.scss';
 
@@ -38,32 +40,24 @@ export default function AddRecord() {
 
     const [visible, setVisible] = useState(false);
 
+
     const onSubmit = () => {
-        const userId = firebase.auth().currentUser.uid;
+        const userUID = firebase.auth().currentUser.uid;
 
         database
-            .collection('users')
-            .doc(userId)
-            .collection('bills')
-            .set({
+            .collection("bills")
+            .add({
+                createdBy: userUID,
                 title: title,
                 amount: amount,
                 categorie: categorie
             })
             .then(() => {
-                console.log(bills)
+                console.log("Successfully set!");
             })
-
-        // database.collection('users')
-        //     .get()
-        //     .then((users) => {
-        //         users.forEach((user) => {
-        //             if (user.id === userId) {
-        //                 let bills = user.data().bills
-        //                 setBills(bills);
-        //             }
-        //         });
-        //     })
+            .catch((error) => {
+                console.error("Error on writing: ", error);
+            });
     }
 
     return (
@@ -106,13 +100,13 @@ export default function AddRecord() {
                                 <Tabs type="card">
                                     <TabPane tab="Expense" key="1" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
-                                            <InputNumber value={amount} onInput={(ev) => setAmount(ev.target.value)} />
+                                            <Input type="number" value={amount} onChange={(ev) => setAmount(ev.target.value)} />
                                         </Form.Item>
                                     </TabPane>
 
                                     <TabPane tab="Income" key="2" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
-                                            <InputNumber value={amount} onInput={(ev) => setAmount(ev.target.value)}
+                                            <Input type="number" value={amount} onChange={(ev) => setAmount(ev.target.value)}
                                                 className={styles.homepageTypeAmountInput} />
                                         </Form.Item>
                                     </TabPane>
@@ -133,9 +127,9 @@ export default function AddRecord() {
                                     className={styles.homepageTypeExpense}>
 
                                     <Select
-                                        value={categorie} onSelect={(ev) => setCategorie(ev.target.value)}
+                                        onChange={(value) => setCategorie(value)}
                                         style={{ width: "310px" }} >
-                                        <Select.Option value="foodAndDrinks">Food &amp; Drinks</Select.Option>
+                                        <Select.Option value={"foodAndDrinks"}>Food &amp; Drinks</Select.Option>
                                         <Select.Option value="shopping">Shopping</Select.Option>
                                         <Select.Option value="housingAndUtilities">Housing &amp; Utilities</Select.Option>
                                         <Select.Option value="vehicleAndTransportation">Vehicle &amp; Transportation</Select.Option>
