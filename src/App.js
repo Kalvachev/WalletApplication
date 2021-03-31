@@ -23,6 +23,8 @@ function App() {
   const [user, setUser] = useState(null);
   const [something, setSomething] = useState([]);
 
+  const currentUser = firebase.auth().currentUser;
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
@@ -58,19 +60,20 @@ function App() {
       <BrowserRouter>
         <Navbar />
 
-        {/* {user ? <HomePage /> : <LoginPage/> } */}
-
         <Switch>
           <Route exact path="/">
-            <HomePage />
+            {currentUser ? <HomePage /> : <LoginPage />}
+            {/* <HomePage /> */}
           </Route>
 
           <Route path="/records">
-            <Records />
+            {currentUser ? <Records /> : <LoginPage />}
+            {/* <Records /> */}
           </Route>
 
           <Route path="/analytics">
-            <Analytics />
+            {currentUser ? <Analytics /> : <LoginPage />}
+            {/* <Analytics /> */}
           </Route>
 
           <Route path="/login">

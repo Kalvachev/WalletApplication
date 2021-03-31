@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { database } from '../firebase'
+import { ExpenseOptions, IncomeOptions } from './TypeExpenseOptions'
 
 import {
     Form,
@@ -94,7 +95,7 @@ export default function AddRecord() {
                 console.error("Error on writing: ", error);
             });
 
-        setVisible(false);
+        // setVisible(false);
     }
 
     console.log('Active Tab:', activeTab);
@@ -154,38 +155,55 @@ export default function AddRecord() {
                             </div>
 
                             <div id={styles.bottomRecordsPart}>
-                                <Form.Item label="Title" className={styles.homepageTypeDate}>
+                                <Form.Item label="Title" className={styles.homepageTypeDate}
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                    name="Title"
+                                >
                                     <Input
-                                        required={true}
                                         value={title}
                                         onInput={(ev) => setTitle(ev.target.value)}
                                         style={{ width: "310px" }} />
                                 </Form.Item>
 
                                 <Form.Item
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
                                     label="Category"
-                                    name="category"
+                                    name="Category"
                                     className={styles.homepageTypeExpense}>
 
-                                    <Select
-                                        required={true}
-                                        onChange={(value) => setCategorie(value)}
-                                        style={{ width: "310px" }} >
-                                        <Select.Option value={"foodAndDrinks"}>Food &amp; Drinks</Select.Option>
-                                        <Select.Option value="shopping">Shopping</Select.Option>
-                                        <Select.Option value="housingAndUtilities">Housing &amp; Utilities</Select.Option>
-                                        <Select.Option value="vehicleAndTransportation">Vehicle &amp; Transportation</Select.Option>
-                                        <Select.Option value="communicationAndPC">Communication &amp; PC</Select.Option>
-                                        <Select.Option value="entertainementAndLife">Entertainment &amp; Life</Select.Option>
-                                        <Select.Option value="investments">Investments</Select.Option>
-                                    </Select>
+                                    {activeTab === 'expense' ? <ExpenseOptions setCategorie={setCategorie} /> : <IncomeOptions setCategorie={setCategorie} />}
                                 </Form.Item>
 
-                                <Form.Item label="Date" className={styles.homepageTypeDate}>
+                                <Form.Item
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                    label="Date"
+                                    name="Date"
+                                    className={styles.homepageTypeDate}>
                                     <DatePicker style={{ width: "310px" }} onChange={setDate} />
                                 </Form.Item>
 
-                                <Form.Item label="Time" {...config}>
+                                <Form.Item
+                                    rules={[
+                                        {
+                                            required: true,
+                                        },
+                                    ]}
+                                    label="Time" {...config}
+                                    name="Time"
+                                >
+
                                     <TimePicker style={{ width: "310px" }} onChange={setTime} />
                                 </Form.Item>
 
