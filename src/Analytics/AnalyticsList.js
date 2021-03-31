@@ -22,7 +22,7 @@ export default function AnalyticsList({ bills, setBills }) {
                             />
                             <div className={styles.date}>{item.date}</div>
                             <div className={styles.time}>{item.time}</div>
-                            <div className={styles.priceContainer}>{item.money}лв</div>
+                            <div className={styles.priceContainer}>{item.amount}лв</div>
                         </List.Item>
                     )}
                 />
