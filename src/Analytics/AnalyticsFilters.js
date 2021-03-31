@@ -5,10 +5,24 @@ import styles from './analytics.module.scss';
 
 const { SubMenu } = Menu;
 
-export default function AnalyticsFilters() {
+export default function AnalyticsFilters({ bills, setBills }) {
     const handleClick = e => {
         console.log('click ', e);
     };
+
+    function allTypesHandler() {
+        setBills(bills)
+    }
+
+    function incomeHandler() {
+        let incomeBills = bills.filter(bill => bill.type === 'income');
+        setBills(incomeBills);
+    }
+
+    function expenseHandler() {
+        let expenseBills = bills.filter(bill => bill.type === 'expense');
+        setBills(expenseBills);
+    }
 
     return (
         <>
@@ -21,9 +35,9 @@ export default function AnalyticsFilters() {
                 className={styles.analyticsMenu}
             >
                 <SubMenu key="sub1" icon={<HistoryOutlined />} title="RECORD TYPES">
-                    <Menu.Item key="1">All Record Types</Menu.Item>
-                    <Menu.Item key="2">Income</Menu.Item>
-                    <Menu.Item key="3">Expense</Menu.Item>
+                    <Menu.Item key="1" onClick={allTypesHandler}>All Record Types</Menu.Item>
+                    <Menu.Item key="2" onClick={incomeHandler}>Income</Menu.Item>
+                    <Menu.Item key="3" onClick={expenseHandler}>Expense</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" icon={<DollarOutlined />} title="Expenses">
                     <Menu.Item key="4">Food &amp; Drinks</Menu.Item>

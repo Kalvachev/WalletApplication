@@ -45,21 +45,21 @@ export default function AddRecord() {
     const onSubmit = () => {
         const userUID = firebase.auth().currentUser.uid;
 
-        // // GET ALL BILLS
-        // database
-        //     .collection("bills")
-        //     .where('createdBy', '==', userUID)
-        //     .get()
-        //     .then(snpashot => {
-        //         let bills = [];
+        // GET ALL BILLS
+        database
+            .collection("bills")
+            .where('createdBy', '==', userUID)
+            .get()
+            .then(snpashot => {
+                let bills = [];
 
-        //         snpashot.forEach(bill => {
-        //             bills.push(bill.data());
-        //         })
-        //         console.log(
-        //             'Bills', bills
-        //         )
-        //     })
+                snpashot.forEach(bill => {
+                    bills.push(bill.data());
+                })
+                console.log(
+                    'Bills', bills
+                )
+            })
 
 
         // GET Request

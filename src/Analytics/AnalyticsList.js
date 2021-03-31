@@ -5,23 +5,8 @@ import { data } from '../data'
 import firebase from '../firebase'
 import { database } from '../firebase'
 
-export default function AnalyticsList() {
-    const [bills, setBills] = useState([]);
+export default function AnalyticsList({ bills, setBills }) {
 
-    useEffect(() => {
-        const userId = firebase.auth().currentUser.uid;
-
-        database.collection('users')
-            .get()
-            .then((users) => {
-                users.forEach((user) => {
-                    if (user.id === userId) {
-                        let bills = user.data().bills
-                        console.log(bills);
-                    }
-                });
-            })
-    }, [])
 
     return (
         <>
@@ -32,9 +17,8 @@ export default function AnalyticsList() {
                     renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
-                                title={item.type}
-                                description={item.title}
-
+                                title={item.title}
+                                description={item.type}
                             />
                             <div className={styles.date}>{item.date}</div>
                             <div className={styles.time}>{item.time}</div>
