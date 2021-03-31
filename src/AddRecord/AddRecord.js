@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import { database } from '../firebase'
 
 import {
@@ -28,7 +29,7 @@ export default function AddRecord() {
     const [categorie, setCategorie] = useState('');
     const [date, setDate] = useState();;
     const [time, setTime] = useState();
-    const [bills, setBills] = useState([]);
+    const [activeTab, setActiveTab] = useState('expense')
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
@@ -44,13 +45,47 @@ export default function AddRecord() {
     const onSubmit = () => {
         const userUID = firebase.auth().currentUser.uid;
 
+        // // GET ALL BILLS
+        // database
+        //     .collection("bills")
+        //     .where('createdBy', '==', userUID)
+        //     .get()
+        //     .then(snpashot => {
+        //         let bills = [];
+
+        //         snpashot.forEach(bill => {
+        //             bills.push(bill.data());
+        //         })
+        //         console.log(
+        //             'Bills', bills
+        //         )
+        //     })
+
+
+        // GET Request
+        // database
+        //     .collection("users")
+        //     .doc(userUID)
+        //     .get()
+        //     .then(res => console.log(res.data()))
+
+        // console.log('Date: ', )
+        // console.log('Time: ', )
+
+        let jsDate = moment(date).format('L');
+        let jsTime = moment(time).format('LT');
+
         database
             .collection("bills")
             .add({
+                type: activeTab,
                 createdBy: userUID,
                 title: title,
                 amount: amount,
-                categorie: categorie
+                categorie: categorie,
+                date: jsDate,
+                time: jsTime,
+
             })
             .then(() => {
                 console.log("Successfully set!");
@@ -58,7 +93,12 @@ export default function AddRecord() {
             .catch((error) => {
                 console.error("Error on writing: ", error);
             });
+
+        setVisible(false);
     }
+
+    console.log('Active Tab:', activeTab);
+
 
     return (
         <div className={styles.modalButtonContainer}>
@@ -97,14 +137,14 @@ export default function AddRecord() {
                             </h2> */}
 
                             <div className={styles.topRecordsPart}>
-                                <Tabs type="card">
-                                    <TabPane tab="Expense" key="1" className={styles.expenseTab}>
+                                <Tabs type="card" activeKey={activeTab} onChange={setActiveTab}>
+                                    <TabPane tab="expense" key="expense" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
                                             <Input type="number" value={amount} onChange={(ev) => setAmount(ev.target.value)} />
                                         </Form.Item>
                                     </TabPane>
 
-                                    <TabPane tab="Income" key="2" className={styles.expenseTab}>
+                                    <TabPane tab="income" key="income" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
                                             <Input type="number" value={amount} onChange={(ev) => setAmount(ev.target.value)}
                                                 className={styles.homepageTypeAmountInput} />
@@ -140,11 +180,11 @@ export default function AddRecord() {
                                 </Form.Item>
 
                                 <Form.Item label="Date" className={styles.homepageTypeDate}>
-                                    <DatePicker style={{ width: "310px" }} />
+                                    <DatePicker style={{ width: "310px" }} onChange={setDate} />
                                 </Form.Item>
 
                                 <Form.Item label="Time" {...config}>
-                                    <TimePicker style={{ width: "310px" }} />
+                                    <TimePicker style={{ width: "310px" }} onChange={setTime} />
                                 </Form.Item>
 
                                 <div className={styles.addRecordsButtonContainer}>
