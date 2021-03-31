@@ -156,6 +156,7 @@ export default function AddRecord() {
                             <div id={styles.bottomRecordsPart}>
                                 <Form.Item label="Title" className={styles.homepageTypeDate}>
                                     <Input
+                                        required={true}
                                         value={title}
                                         onInput={(ev) => setTitle(ev.target.value)}
                                         style={{ width: "310px" }} />
@@ -167,6 +168,7 @@ export default function AddRecord() {
                                     className={styles.homepageTypeExpense}>
 
                                     <Select
+                                        required={true}
                                         onChange={(value) => setCategorie(value)}
                                         style={{ width: "310px" }} >
                                         <Select.Option value={"foodAndDrinks"}>Food &amp; Drinks</Select.Option>

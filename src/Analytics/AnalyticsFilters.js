@@ -15,6 +15,7 @@ export default function AnalyticsFilters({ bills, setBills }) {
     }
 
     function incomeHandler() {
+        console.log(bills)
         let incomeBills = bills.filter(bill => bill.type === 'income');
         setBills(incomeBills);
     }
