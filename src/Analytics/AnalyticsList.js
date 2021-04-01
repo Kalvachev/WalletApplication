@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { List, Avatar } from 'antd';
+import React from 'react'
+import { List } from 'antd';
 import styles from './analytics.module.scss'
-import { data } from '../data'
-import firebase from '../firebase'
-import { database } from '../firebase'
+import { BiDrink } from "react-icons/bi";
+
 
 export default function AnalyticsList({ bills, setBills }) {
 
@@ -16,6 +15,7 @@ export default function AnalyticsList({ bills, setBills }) {
                     dataSource={bills}
                     renderItem={item => (
                         <List.Item>
+                            <BiDrink size='2em' style={{ marginRight: '25px' }} />
                             <List.Item.Meta
                                 title={item.title}
                                 description={item.type}

@@ -1,7 +1,14 @@
 import React from 'react'
 import { Menu } from 'antd';
-import { DollarOutlined, HistoryOutlined } from '@ant-design/icons';
+import { DollarOutlined, HistoryOutlined, EuroOutlined } from '@ant-design/icons';
 import styles from './analytics.module.scss';
+import {
+    BiDrink, BiShoppingBag, BiCar, BiBookOpen,
+    BiMoney, BiHappy, BiDollar, BiCoinStack, BiEuro,
+    BiBuildings
+}
+    from "react-icons/bi";
+
 
 const { SubMenu } = Menu;
 
@@ -97,23 +104,23 @@ export default function AnalyticsFilters({ bills, setBills, allBills }) {
                 className={styles.analyticsMenu}
             >
                 <SubMenu key="sub1" icon={<HistoryOutlined />} title="RECORD TYPES">
-                    <Menu.Item key="1" onClick={allTypesHandler}>All Record Types</Menu.Item>
-                    <Menu.Item key="2" onClick={incomeHandler}>Income</Menu.Item>
-                    <Menu.Item key="3" onClick={expenseHandler}>Expense</Menu.Item>
+                    <Menu.Item key="1" onClick={allTypesHandler}><HistoryOutlined />All Record Types</Menu.Item>
+                    <Menu.Item key="2" onClick={incomeHandler}><DollarOutlined size='1.5em' />Income</Menu.Item>
+                    <Menu.Item key="3" onClick={expenseHandler}><EuroOutlined />Expense</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub2" icon={<DollarOutlined />} title="Expenses">
-                    <Menu.Item key="4" onClick={foodHandler}>Food &amp; Drinks</Menu.Item>
-                    <Menu.Item key="5" onClick={shoppingHandler}>Shopping</Menu.Item>
-                    <Menu.Item key="6" onClick={vehicleHandler}>Vehicle &amp; Transportation</Menu.Item>
-                    <Menu.Item key="7" onClick={pcHandler}>Communication &amp; PC</Menu.Item>
-                    <Menu.Item key="8" onClick={lifeHandler}>Entertainment &amp; Life</Menu.Item>
-                    <Menu.Item key="9" onClick={investmentsHandler}>Investments</Menu.Item>
+                    <Menu.Item key="4" onClick={foodHandler}><BiDrink size='1.5em' />Food &amp; Drinks</Menu.Item>
+                    <Menu.Item key="5" onClick={shoppingHandler}><BiShoppingBag size='1.5em' />Shopping</Menu.Item>
+                    <Menu.Item key="6" onClick={vehicleHandler}><BiCar size='1.5em' />Vehicle &amp; Transportation</Menu.Item>
+                    <Menu.Item key="7" onClick={pcHandler}><BiBookOpen size='1.5em' />Communication &amp; PC</Menu.Item>
+                    <Menu.Item key="8" onClick={lifeHandler}><BiHappy size='1.5em' />Entertainment &amp; Life</Menu.Item>
+                    <Menu.Item key="9" onClick={investmentsHandler}><BiMoney size='1.5em' />Investments</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub4" icon={<DollarOutlined />} title="Income">
-                    <Menu.Item key="10" onClick={salaryHandler}>Salary</Menu.Item>
-                    <Menu.Item key="11" onClick={gamblingHandler}>Lottery &amp; Gambling</Menu.Item>
-                    <Menu.Item key="12" onClick={interestsHandler}>Interests &amp; Dividends</Menu.Item>
-                    <Menu.Item key="13" onClick={rentsHandler}>Lending &amp; Renting</Menu.Item>
+                <SubMenu key="sub4" icon={<EuroOutlined />} title="Income">
+                    <Menu.Item key="10" onClick={salaryHandler}><BiDollar size='1.5em' />Salary</Menu.Item>
+                    <Menu.Item key="11" onClick={gamblingHandler}><BiCoinStack size='1.5em' />Lottery &amp; Gambling</Menu.Item>
+                    <Menu.Item key="12" onClick={interestsHandler}><BiEuro size='1.5em' />Interests &amp; Dividends</Menu.Item>
+                    <Menu.Item key="13" onClick={rentsHandler}><BiBuildings size='1.5em' />Lending &amp; Renting</Menu.Item>
                 </SubMenu>
             </Menu>
         </>

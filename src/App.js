@@ -49,11 +49,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const userUID = '';
-
-    if (currentUser) {
-      userUID = firebase.auth().currentUser.uid;
-    }
+    const userUID = firebase.auth().currentUser.uid;
 
     // GET ALL BILLS
     database
