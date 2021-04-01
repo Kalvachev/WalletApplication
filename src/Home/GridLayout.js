@@ -1,6 +1,6 @@
 import React from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-
+import DateFilter from './DateFilter'
 import styles from "./homepage.module.scss"
 
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
@@ -27,7 +27,7 @@ export default function GridLayout() {
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-
+            <DateFilter />
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}

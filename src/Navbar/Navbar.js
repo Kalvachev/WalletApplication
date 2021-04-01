@@ -6,9 +6,10 @@ import Logout from '../Logout/Logout'
 import styles from './navbar.module.scss'
 const { Header } = Layout;
 
-export default function Navbar() {
+export default function Navbar({ user }) {
+
     return (
-        <>
+        <><div>
             <Layout>
                 <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }} className={styles.navigationContainer}>
                     <Menu theme="dark" mode="horizontal">
@@ -30,6 +31,7 @@ export default function Navbar() {
                     </div>
                 </Header>
             </Layout>
+        </div>
         </>
     )
 }

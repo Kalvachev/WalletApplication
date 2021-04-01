@@ -21,7 +21,7 @@ import "../node_modules/react-resizable/css/styles.css";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [something, setSomething] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const currentUser = firebase.auth().currentUser;
 
@@ -29,28 +29,29 @@ function App() {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         setUser(user);
+        console.log(user);
       } else {
         console.log("No user: ", user);
       }
     });
   }, []);
 
-  useEffect(() => {
-    database.collection("users").get()
-      .then((users) => {
-        let usersDb = [];
-        users.forEach((user) => {
-          usersDb.push(user.data());
-        });
-        setSomething(usersDb);
-      });
+  // useEffect(() => {
+  //   database.collection("users").get()
+  //     .then((users) => {
+  //       let usersDb = [];
+  //       users.forEach((user) => {
+  //         usersDb.push(user.data());
+  //       });
+  //       setUsers(usersDb);
+  //     });
 
-  }, []);
+  // }, []);
 
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <Navbar user={user} />
 
         <Switch>
           <Route exact path="/">
