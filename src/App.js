@@ -22,6 +22,7 @@ import "../node_modules/react-resizable/css/styles.css";
 function App() {
   const [user, setUser] = useState(null);
   const [something, setSomething] = useState([]);
+  const [allBills, setAllBills] = useState([]);
 
   const currentUser = firebase.auth().currentUser;
 
@@ -45,15 +46,25 @@ function App() {
         setSomething(usersDb);
       });
 
-    // database.collection("other").get()
-    //   .then((querySnapshot) => {
-    //     let dbOther = [];
-    //     querySnapshot.forEach((doc) => {
-    //       dbOther.push(doc.data());
-    //     });
-    //     setGenresList(dbOther);
-    //   });
   }, []);
+
+  useEffect(() => {
+    const userUID = firebase.auth().currentUser.uid;
+
+    // GET ALL BILLS
+    database
+      .collection("bills")
+      .where('createdBy', '==', userUID)
+      .get()
+      .then(snpashot => {
+        let allBills = [];
+
+        snpashot.forEach(bill => {
+          allBills.push(bill.data());
+        })
+        setAllBills(allBills);
+      })
+  }, [])
 
   return (
     <div className="App">
@@ -62,17 +73,17 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            {currentUser ? <HomePage /> : <LoginPage />}
+            {currentUser ? <HomePage allBills={allBills} setAllBills={setAllBills} /> : <LoginPage />}
             {/* <HomePage /> */}
           </Route>
 
           <Route path="/records">
-            {currentUser ? <Records /> : <LoginPage />}
+            {currentUser ? <Records allBills={allBills} setAllBills={setAllBills} /> : <LoginPage />}
             {/* <Records /> */}
           </Route>
 
           <Route path="/analytics">
-            {currentUser ? <Analytics /> : <LoginPage />}
+            {currentUser ? <Analytics allBills={allBills} setAllBills={setAllBills} /> : <LoginPage />}
             {/* <Analytics /> */}
           </Route>
 

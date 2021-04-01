@@ -10,7 +10,7 @@ defaults.global.legend.position = 'bottom'
 
 const set = new Set(data.map(d => d.date));
 
-export default function Records() {
+export default function Records({ allBills, setAllBills }) {
     return (
         <div className={styles.recordsPageContainer}>
             {/* Left Graph Doughnut */}

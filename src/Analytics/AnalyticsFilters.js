@@ -5,54 +5,85 @@ import styles from './analytics.module.scss';
 
 const { SubMenu } = Menu;
 
-export default function AnalyticsFilters({ bills, setBills }) {
+export default function AnalyticsFilters({ bills, setBills, allBills }) {
     const handleClick = e => {
         console.log('click ', e);
     };
 
     function allTypesHandler() {
-        setBills(bills)
+        setBills(allBills)
     }
 
     function incomeHandler() {
-        console.log(bills)
-        let incomeBills = bills.filter(bill => bill.type === 'income');
+        setBills(allBills)
+        let incomeBills = allBills.filter(bill => bill.type === 'income');
         setBills(incomeBills);
     }
 
     function expenseHandler() {
-        let expenseBills = bills.filter(bill => bill.type === 'expense');
+        setBills(allBills)
+        let expenseBills = allBills.filter(bill => bill.type === 'expense');
         setBills(expenseBills);
     }
 
     function foodHandler() {
-        let foodBills = bills.filter(bill => bill.categorie === 'foodAndDrinks')
+        setBills(allBills)
+        let foodBills = allBills.filter(bill => bill.categorie === 'foodAndDrinks')
         setBills(foodBills)
     }
 
     function shoppingHandler() {
-        let foodBills = bills.filter(bill => bill.categorie === 'shopping')
+        setBills(allBills)
+        let foodBills = allBills.filter(bill => bill.categorie === 'shopping')
         setBills(foodBills)
     }
 
     function vehicleHandler() {
-        let foodBills = bills.filter(bill => bill.categorie === 'vehicleAndTransportation')
+        setBills(allBills)
+        let foodBills = allBills.filter(bill => bill.categorie === 'vehicleAndTransportation')
         setBills(foodBills)
     }
 
     function pcHandler() {
-        let foodBills = bills.filter(bill => bill.categorie === 'communicationAndPC')
+        setBills(allBills)
+        let foodBills = allBills.filter(bill => bill.categorie === 'communicationAndPC')
         setBills(foodBills)
     }
 
     function lifeHandler() {
-        let foodBills = bills.filter(bill => bill.categorie === 'entertainementAndLife')
+        setBills(allBills)
+        let foodBills = allBills.filter(bill => bill.categorie === 'entertainementAndLife')
         setBills(foodBills)
     }
 
     function investmentsHandler() {
-        let foodBills = bills.filter(bill => bill.categorie === 'investments')
+        setBills(allBills)
+        let foodBills = allBills.filter(bill => bill.categorie === 'investments')
         setBills(foodBills)
+    }
+
+    function salaryHandler() {
+        setBills(allBills)
+        let salaryIncome = allBills.filter(bill => bill.categorie === 'salary')
+        setBills(salaryIncome)
+    }
+
+    function gamblingHandler() {
+        setBills(allBills)
+        let gamblingIncome = allBills.filter(bill => bill.categorie === 'lotteryAndGambling')
+        setBills(gamblingIncome)
+    }
+
+    function interestsHandler() {
+        setBills(allBills)
+        let interestsIncome = allBills.filter(bill => bill.categorie === 'interestsAndDividents')
+        setBills(interestsIncome)
+    }
+
+    function rentsHandler() {
+        setBills(allBills)
+        let interestsIncome = allBills.filter(bill => bill.categorie === 'lendingAndRenting')
+        setBills(interestsIncome)
     }
 
     return (
@@ -79,10 +110,10 @@ export default function AnalyticsFilters({ bills, setBills }) {
                     <Menu.Item key="9" onClick={investmentsHandler}>Investments</Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub4" icon={<DollarOutlined />} title="Income">
-                    <Menu.Item key="10">Salary</Menu.Item>
-                    <Menu.Item key="11">Lottery &amp; Gambling</Menu.Item>
-                    <Menu.Item key="12">Interests &amp; Dividends</Menu.Item>
-                    <Menu.Item key="13">Lending &amp; Renting</Menu.Item>
+                    <Menu.Item key="10" onClick={salaryHandler}>Salary</Menu.Item>
+                    <Menu.Item key="11" onClick={gamblingHandler}>Lottery &amp; Gambling</Menu.Item>
+                    <Menu.Item key="12" onClick={interestsHandler}>Interests &amp; Dividends</Menu.Item>
+                    <Menu.Item key="13" onClick={rentsHandler}>Lending &amp; Renting</Menu.Item>
                 </SubMenu>
             </Menu>
         </>

@@ -14,7 +14,7 @@ const allExpenses = Math.abs(data.filter(data => data.type === "Expense").reduce
 const allIncomes = data.filter(data => data.type === "Income").reduce(((acc, curr) => acc + curr.money), 0);
 
 
-export default function GridLayout() {
+export default function GridLayout({ allBills, setAllBills }) {
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -27,7 +27,7 @@ export default function GridLayout() {
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            
+
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}

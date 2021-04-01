@@ -5,7 +5,7 @@ import styles from './analytics.module.scss'
 import { database } from '../firebase'
 import firebase from '../firebase'
 
-export default function Analytics() {
+export default function Analytics({ allBills, setAllBills }) {
     const [bills, setBills] = useState([]);
 
     useEffect(() => {
@@ -29,8 +29,8 @@ export default function Analytics() {
     return (
         <>
             <div className={styles.analyticsPageContainer}>
-                <AnalyticsFilters bills={bills} setBills={setBills} />
-                <AnalyticsList bills={bills} setBills={setBills} />
+                <AnalyticsFilters bills={bills} setBills={setBills} allBills={allBills} />
+                <AnalyticsList bills={bills} setBills={setBills} allBills={allBills} />
             </div>
         </>
     )
