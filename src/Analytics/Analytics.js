@@ -8,9 +8,16 @@ import firebase from '../firebase'
 export default function Analytics() {
     const [bills, setBills] = useState([]);
     const [allBills, setAllBills] = useState([]);
- 
+
+    const currentUser = firebase.auth().currentUser;
+
+
     useEffect(() => {
-        const userUID = firebase.auth().currentUser.uid;
+        let userUID = '';
+
+        if (currentUser) {
+            userUID = firebase.auth().currentUser.uid;
+        }
 
         // GET ALL BILLS
         database
@@ -28,22 +35,26 @@ export default function Analytics() {
     }, [])
 
     useEffect(() => {
-        const userUID = firebase.auth().currentUser.uid;
-    
+        let userUID = '';
+
+        if (currentUser) {
+            userUID = firebase.auth().currentUser.uid;
+        }
+
         // GET ALL BILLS
         database
-          .collection("bills")
-          .where('createdBy', '==', userUID)
-          .get()
-          .then(snpashot => {
-            let allBills = [];
-    
-            snpashot.forEach(bill => {
-              allBills.push(bill.data());
+            .collection("bills")
+            .where('createdBy', '==', userUID)
+            .get()
+            .then(snpashot => {
+                let allBills = [];
+
+                snpashot.forEach(bill => {
+                    allBills.push(bill.data());
+                })
+                setAllBills(allBills);
             })
-            setAllBills(allBills);
-          })
-      }, [])
+    }, [])
 
     return (
         <>
