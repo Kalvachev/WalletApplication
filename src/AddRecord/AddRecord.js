@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { database } from '../firebase'
 import { ExpenseOptions, IncomeOptions } from './TypeExpenseOptions'
-
+import { subDays, addDays } from 'date-fns'
 import {
     Form,
     Button,
@@ -98,9 +98,6 @@ export default function AddRecord() {
         // setVisible(false);
     }
 
-    console.log('Active Tab:', activeTab);
-
-
     return (
         <div className={styles.modalButtonContainer}>
             <Button type="primary" onClick={() => setVisible(true)}>
@@ -191,7 +188,7 @@ export default function AddRecord() {
                                     label="Date"
                                     name="Date"
                                     className={styles.homepageTypeDate}>
-                                    <DatePicker style={{ width: "310px" }} onChange={setDate} />
+                                    <DatePicker style={{ width: "310px" }} onChange={setDate} disabledDate={d => !d || d.isAfter(addDays(new Date(), 7)) || d.isSameOrBefore(subDays(new Date(), 1))} />
                                 </Form.Item>
 
                                 <Form.Item

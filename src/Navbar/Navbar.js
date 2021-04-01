@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom'
 import AddRecord from '../AddRecord/AddRecord'
 import Logout from '../Logout/Logout'
 import styles from './navbar.module.scss'
+
 const { Header } = Layout;
 
-export default function Navbar({ user }) {
+export default function Navbar() {
 
     return (
         <><div>
