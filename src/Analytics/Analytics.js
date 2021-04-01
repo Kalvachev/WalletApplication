@@ -5,9 +5,10 @@ import styles from './analytics.module.scss'
 import { database } from '../firebase'
 import firebase from '../firebase'
 
-export default function Analytics({ allBills, setAllBills }) {
+export default function Analytics() {
     const [bills, setBills] = useState([]);
-
+    const [allBills, setAllBills] = useState([]);
+ 
     useEffect(() => {
         const userUID = firebase.auth().currentUser.uid;
 
@@ -25,6 +26,24 @@ export default function Analytics({ allBills, setAllBills }) {
                 setBills(bills)
             })
     }, [])
+
+    useEffect(() => {
+        const userUID = firebase.auth().currentUser.uid;
+    
+        // GET ALL BILLS
+        database
+          .collection("bills")
+          .where('createdBy', '==', userUID)
+          .get()
+          .then(snpashot => {
+            let allBills = [];
+    
+            snpashot.forEach(bill => {
+              allBills.push(bill.data());
+            })
+            setAllBills(allBills);
+          })
+      }, [])
 
     return (
         <>

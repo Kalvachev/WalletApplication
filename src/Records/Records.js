@@ -10,7 +10,7 @@ defaults.global.legend.position = 'bottom'
 
 const set = new Set(data.map(d => d.date));
 
-export default function Records({ allBills, setAllBills }) {
+export default function Records() {
     return (
         <div className={styles.recordsPageContainer}>
             {/* Left Graph Doughnut */}
@@ -47,7 +47,19 @@ export default function Records({ allBills, setAllBills }) {
                         height={300}
                         width={300}
                         options={{
-                            maintainAspectRatio: false,
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                    
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += Math.round(tooltipItem.yLabel * 100) / 100;
+                                        return label;
+                                    }
+                                }
+                            }
                         }}
                     />
                 </Card>

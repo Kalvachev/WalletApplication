@@ -22,7 +22,6 @@ import "../node_modules/react-resizable/css/styles.css";
 function App() {
   const [user, setUser] = useState(null);
   const [something, setSomething] = useState([]);
-  const [allBills, setAllBills] = useState([]);
 
   const currentUser = firebase.auth().currentUser;
 
@@ -48,24 +47,6 @@ function App() {
 
   }, []);
 
-  useEffect(() => {
-    const userUID = firebase.auth().currentUser.uid;
-
-    // GET ALL BILLS
-    database
-      .collection("bills")
-      .where('createdBy', '==', userUID)
-      .get()
-      .then(snpashot => {
-        let allBills = [];
-
-        snpashot.forEach(bill => {
-          allBills.push(bill.data());
-        })
-        setAllBills(allBills);
-      })
-  }, [])
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -73,17 +54,17 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            {currentUser ? <HomePage allBills={allBills} setAllBills={setAllBills} /> : <LoginPage />}
+            {currentUser ? <HomePage /> : <LoginPage />}
             {/* <HomePage /> */}
           </Route>
 
           <Route path="/records">
-            {currentUser ? <Records allBills={allBills} setAllBills={setAllBills} /> : <LoginPage />}
+            {currentUser ? <Records /> : <LoginPage />}
             {/* <Records /> */}
           </Route>
 
           <Route path="/analytics">
-            {currentUser ? <Analytics allBills={allBills} setAllBills={setAllBills} /> : <LoginPage />}
+            {currentUser ? <Analytics /> : <LoginPage />}
             {/* <Analytics /> */}
           </Route>
 

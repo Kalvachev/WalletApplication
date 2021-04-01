@@ -14,7 +14,7 @@ const allExpenses = Math.abs(data.filter(data => data.type === "Expense").reduce
 const allIncomes = data.filter(data => data.type === "Income").reduce(((acc, curr) => acc + curr.money), 0);
 
 
-export default function GridLayout({ allBills, setAllBills }) {
+export default function GridLayout() {
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -72,6 +72,19 @@ export default function GridLayout({ allBills, setAllBills }) {
                         width={200}
                         options={{
                             maintainAspectRatio: false,
+                            tooltips: {
+                                callbacks: {
+                                    label: function(tooltipItem, data) {
+                                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                    
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        label += Math.round(tooltipItem.yLabel * 100) / 100;
+                                        return label;
+                                    }
+                                }
+                            }
                         }}
                     />
                 </div>
