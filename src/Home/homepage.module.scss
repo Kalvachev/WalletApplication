@@ -12,3 +12,26 @@
 .homePageLastRecordsContainer {
     padding: 10px 20px;
 }
+
+.widgetContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 2%;
+    text-align: center;
+}
+
+.firstWidgetChartContainer, .secondWidgetChartContainer, .thirdWidgetChartContainer, .fourthWidgetChartContainer, .fifthWidgetChartContainer, .sixthWidgetChartContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.firstWidgetChartHeadingContainer h2 {
+    padding-top: 25px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    font-weight: bold;
+}
+
+.firstWidgetChartHeadingContainer {
+}

@@ -20,32 +20,32 @@ export const data = [
         date: "11.03.2021",
         time: '13:00'
     },
-    {
-        title: 'Paid the bills',
-        money: - 50,
-        type: 'Expense',
-        date: "12.03.2021",
-        time: '13:00'
-    },
-    {
-        title: 'Won a bet',
-        money: 150,
-        type: 'Income',
-        date: "12.03.2021",
-        time: '13:00'
-    },
-    {
-        title: 'Paid the rent',
-        money: - 500,
-        type: 'Expense',
-        date: "13.03.2021",
-        time: '13:00'
-    },
-    {
-        title: 'Bought groceries',
-        money: - 50,
-        type: 'Expense',
-        date: "13.03.2021",
-        time: '13:00'
-    },
+    // {
+    //     title: 'Paid the bills',
+    //     money: - 50,
+    //     type: 'Expense',
+    //     date: "12.03.2021",
+    //     time: '13:00'
+    // },
+    // {
+    //     title: 'Won a bet',
+    //     money: 150,
+    //     type: 'Income',
+    //     date: "12.03.2021",
+    //     time: '13:00'
+    // },
+    // {
+    //     title: 'Paid the rent',
+    //     money: - 500,
+    //     type: 'Expense',
+    //     date: "13.03.2021",
+    //     time: '13:00'
+    // },
+    // {
+    //     title: 'Bought groceries',
+    //     money: - 50,
+    //     type: 'Expense',
+    //     date: "13.03.2021",
+    //     time: '13:00'
+    // },
 ];
