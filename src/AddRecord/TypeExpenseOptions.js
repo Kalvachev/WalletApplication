@@ -9,7 +9,7 @@ function ExpenseOptions({ categorie, setCategorie }) {
                 onChange={(value) => setCategorie(value)}
                 style={{ width: "310px" }}
             >
-                <Select.Option value={"foodAndDrinks"}>Food &amp; Drinks</Select.Option>
+                <Select.Option value="foodAndDrinks">Food &amp; Drinks</Select.Option>
                 <Select.Option value="shopping">Shopping</Select.Option>
                 <Select.Option value="housingAndUtilities">Housing &amp; Utilities</Select.Option>
                 <Select.Option value="vehicleAndTransportation">Vehicle &amp; Transportation</Select.Option>
