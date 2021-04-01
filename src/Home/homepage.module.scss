@@ -21,27 +21,30 @@
     text-align: center;
 }
 
-.firstWidgetChartContainer, .secondWidgetChartContainer, .thirdWidgetChartContainer, .fourthWidgetChartContainer, .fifthWidgetChartContainer, .sixthWidgetChartContainer {
+.firstWidgetChartContainer,
+.secondWidgetChartContainer,
+.thirdWidgetChartContainer,
+.fourthWidgetChartContainer,
+.fifthWidgetChartContainer,
+.sixthWidgetChartContainer {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    min-height: 240px;
 }
 
-.firstWidgetChartHeadingContainer h2 {
+.widgetChartHeadingContainer h2 {
     padding-top: 25px;
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     font-weight: bold;
 }
 
-.firstWidgetChartHeadingContainer {
-}
-
-.filtersSelectComp{
+.filtersSelectComp {
     width: 320px;
     margin-left: 40%;
     border: 0.5px solid black;
 }
 
-.filtersRadioBtns {
-    display: none;
+.filtersSelectComp {
+    margin-bottom: 1em;
 }

@@ -13,13 +13,13 @@ export default function DateFilter() {
     return (
         <div className={styles.filtersSelectComp}
             onClick={onClickHanler}>
-            <div className={styles.filtersRadioBtns}>
+            {/* <div className={styles.filtersRadioBtns}>
                 <Radio.Group defaultValue="a" buttonStyle="solid">
                     <Radio.Button value="a">Range</Radio.Button>
                     <Radio.Button value="b">Week</Radio.Button>
                     <Radio.Button value="c">Month</Radio.Button>
                 </Radio.Group>
-            </div>
+            </div> */}
             <Select defaultValue="month" style={{ width: 320 }} bordered={false}>
                 <Option value="week">Last Week</Option>
                 <Option value="month">Last Month</Option>

@@ -43,7 +43,7 @@ export default function GridLayout() {
                     className={styles.widgetContainer}
                 >
 
-                    <div className={styles.firstWidgetChartHeadingContainer}>
+                    <div className={styles.widgetChartHeadingContainer}>
                         <h2>Income/Expense Chart</h2>
                     </div>
 
@@ -103,11 +103,13 @@ export default function GridLayout() {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
+                    <div className={styles.widgetChartHeadingContainer}>
+                        <h2>Cash Flow</h2>
+                    </div>
+
                     <div className={styles.secondWidgetChartContainer}
                     >
                         <div>
-                            <h2>Cash Flow</h2>
-
                             <div>
                                 <h3>Income:</h3>
                                 <Progress percent={50} showInfo={false} />
@@ -128,6 +130,10 @@ export default function GridLayout() {
                     className={styles.homePageLastRecordsContainer}
                     className={styles.widgetContainer}
                 >
+                    <div className={styles.widgetChartHeadingContainer}>
+                        <h2>Last Records</h2>
+                    </div>
+
                     <div className={styles.thirdWidgetChartContainer}>
                         <List
                             itemLayout="horizontal"
@@ -152,6 +158,10 @@ export default function GridLayout() {
                     style={{ background: "red" }}
                     className={styles.widgetContainer}
                 >
+                    <div className={styles.widgetChartHeadingContainer}>
+                        <h2>Some kind of line chart</h2>
+                    </div>
+
                     <div className={styles.fourthWidgetChartContainer}>
 
                     </div>
@@ -163,6 +173,10 @@ export default function GridLayout() {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
+                    <div className={styles.widgetChartHeadingContainer}>
+                        <h2>Expenses Structure</h2>
+                    </div>
+
                     <div className={styles.fifthWidgetChartContainer}>
                         <Pie
                             data={{
@@ -206,6 +220,10 @@ export default function GridLayout() {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
+                    <div className={styles.widgetChartHeadingContainer}>
+                        <h2>Incomes Structure</h2>
+                    </div>
+
                     <div className={styles.sixthWidgetChartContainer}>
                         <Bar
                             data={{
