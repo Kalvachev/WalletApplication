@@ -10,8 +10,6 @@ import {
 
 
 export default function AnalyticsList({ bills, setBills }) {
-
-
     return (
         <>
             <div className={styles.analyticsListContainer}>
@@ -20,17 +18,17 @@ export default function AnalyticsList({ bills, setBills }) {
                     dataSource={bills}
                     renderItem={item => (
                         <List.Item>
-                            {item.categorie === 'foodAndDrinks' ? <BiDrink size='1.5em' /> :
-                                item.categorie === 'shopping' ? <BiShoppingBag size='1.5em' /> :
-                                    item.categorie === 'housingAndUtilities' ? <BiBuildingHouse size='1.5em' /> :
-                                        item.categorie === 'vehicleAndTransportation' ? <biCar size='1.5em' /> :
-                                            item.categorie === 'communicationAndPC' ? <BiBookOpen size='1.5em' /> :
-                                                item.categorie === 'entertainementAndLife' ? <BiHappy size='1.5em' /> :
-                                                    item.categorie === 'investments' ? <BiMoney size='1.5em' /> :
-                                                        item.categorie === 'salary' ? <BiDollar size='1.5em' /> :
-                                                            item.categorie === 'lotteryAndGambling' ? <BiCoinStack size='1.5em' /> :
-                                                                item.categorie === 'interestsAndDividents' ? <BiEuro size='1.5em' /> :
-                                                                    <BiBuildings size='1.5em' />
+                            {item.categorie === 'foodAndDrinks' ? <BiDrink size='2.2em' style={{marginRight: '1em'}}/> :
+                                item.categorie === 'shopping' ? <BiShoppingBag size='2.2em' style={{marginRight: '1em'}}/> :
+                                    item.categorie === 'housingAndUtilities' ? <BiBuildingHouse size='2.2em' style={{marginRight: '1em'}}/> :
+                                        item.categorie === 'vehicleAndTransportation' ? <biCar size='2.2em'style={{marginRight: '1em'}} /> :
+                                            item.categorie === 'communicationAndPC' ? <BiBookOpen size='2.2em'style={{marginRight: '1em'}} /> :
+                                                item.categorie === 'entertainementAndLife' ? <BiHappy size='2.2em' style={{marginRight: '1em'}}/> :
+                                                    item.categorie === 'investments' ? <BiMoney size='2.2em' style={{marginRight: '1em'}}/> :
+                                                        item.categorie === 'salary' ? <BiDollar size='2.2em' style={{marginRight: '1em'}}/> :
+                                                            item.categorie === 'lotteryAndGambling' ? <BiCoinStack size='2.2em'style={{marginRight: '1em'}} /> :
+                                                                item.categorie === 'interestsAndDividents' ? <BiEuro size='2.2em' style={{marginRight: '1em'}}/> :
+                                                                    <BiBuildings size='2.2em' style={{marginRight: '1em'}}/>
                             }
                             <List.Item.Meta
                                 title={item.title}
