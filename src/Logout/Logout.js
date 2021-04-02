@@ -10,7 +10,7 @@ export default function Logout() {
 
     const onLogout = () => {
         firebase.auth().signOut().then(() => {
-            history.push('/login')
+            history.replace('/login')
         }).catch((error) => {
             console.log(error.message);
         });

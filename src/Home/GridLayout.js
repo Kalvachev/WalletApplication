@@ -75,23 +75,30 @@ export default function GridLayout() {
                                     },
                                 ],
                             }}
-                            height={200}
-                            width={200}
                             options={{
-                                maintainAspectRatio: false,
                                 tooltips: {
                                     callbacks: {
+                                        title: function (tooltipItem, data) {
+                                            return data['labels'][tooltipItem[0]['index']];
+                                        },
                                         label: function (tooltipItem, data) {
-                                            var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                                            if (label) {
-                                                label += ': ';
-                                            }
-                                            label += Math.round(tooltipItem.yLabel * 100) / 100;
-                                            return label;
+                                            return data['datasets'][0]['data'][tooltipItem['index']];
+                                        },
+                                        afterLabel: function (tooltipItem, data) {
+                                            var dataset = data['datasets'][0];
+                                            var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
+                                            return '(' + percent + '%)';
                                         }
-                                    }
-                                }
+                                    },
+                                    backgroundColor: '#FFF',
+                                    titleFontSize: 16,
+                                    titleFontColor: '#0066ff',
+                                    bodyFontColor: '#000',
+                                    bodyFontSize: 14,
+                                    displayColors: false
+                                },
+                                
+                                maintainAspectRatio: false,
                             }}
                         />
                     </div>
