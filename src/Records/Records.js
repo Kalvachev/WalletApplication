@@ -1,16 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line, Doughnut, defaults } from 'react-chartjs-2';
 import { Card } from 'antd';
 import { data } from '../data'
-
+import firebase from '../firebase'
+import { database } from '../firebase'
 import styles from './records.module.scss'
 
 defaults.global.tooltips.enabled = false
 defaults.global.legend.position = 'bottom'
 
-const set = new Set(data.map(d => d.date));
 
 export default function Records() {
+
+    const [bills, setBills] = useState([])
+    const currentUser = firebase.auth().currentUser;
+
+    const set = new Set(bills.map(d => d.date));
+
+    useEffect(() => {
+        let userUID = '';
+
+        if (currentUser) {
+            userUID = firebase.auth().currentUser.uid;
+        }
+
+        database
+            .collection("bills")
+            .where('createdBy', '==', userUID)
+            .get()
+            .then(snpashot => {
+                let bills = [];
+
+                snpashot.forEach(bill => {
+                    bills.push(bill.data());
+                })
+                setBills(bills)
+            })
+    }, [])
+
     return (
         <div className={styles.recordsPageContainer}>
             {/* Left Graph Doughnut */}
@@ -19,11 +46,11 @@ export default function Records() {
                 <Card>
                     <Doughnut
                         data={{
-                            labels: data.filter(data => data.type == "Income").map(data => data.title),
+                            labels: bills.filter(data => data.type == "income").map(data => data.title),
                             datasets: [
                                 {
                                     label: '# of votes',
-                                    data: data.filter(data => data.type == "Income").map(data => data.money),
+                                    data: bills.filter(data => data.type == "income").map(data => data.amount),
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.2)',
                                         'rgba(54, 162, 235, 0.2)',
@@ -49,9 +76,9 @@ export default function Records() {
                         options={{
                             tooltips: {
                                 callbacks: {
-                                    label: function(tooltipItem, data) {
+                                    label: function (tooltipItem, data) {
                                         var label = data.datasets[tooltipItem.datasetIndex].label || '';
-                    
+
                                         if (label) {
                                             label += ': ';
                                         }
@@ -67,7 +94,7 @@ export default function Records() {
 
             {/* Center Graph Line */}
             <div className={styles.recordsCenterGraphLinearContainer}>
-                <h2>Hello user, your balance is: {data.reduce((acc, curr) => acc + curr.money, 0)}$</h2>
+                <h2>Hello user, your balance is: {data.reduce((acc, curr) => acc + curr.amount, 0)}$</h2>
 
                 <Line className={styles.recordsCenterGraphLinear}
                     data={{
@@ -105,11 +132,11 @@ export default function Records() {
                 <Card>
                     <Doughnut
                         data={{
-                            labels: data.filter(data => data.type == "Expense").map(data => data.title),
+                            labels: bills.filter(data => data.type == "expense").map(data => data.title),
                             datasets: [
                                 {
                                     label: '# of votes',
-                                    data: data.filter(data => data.type == "Expense").map(data => data.money),
+                                    data: bills.filter(data => data.type == "expense").map(data => data.amount),
                                     backgroundColor: [
                                         'rgba(255, 99, 132, 0.2)',
                                         'rgba(54, 162, 235, 0.2)',

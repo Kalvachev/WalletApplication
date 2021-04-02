@@ -2,19 +2,53 @@ import React from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import DateFilter from './DateFilter'
 import styles from "./homepage.module.scss"
-
+import {
+    BiShoppingBag, BiCar, BiBookOpen,
+    BiMoney, BiHappy, BiDollar, BiCoinStack, BiEuro,
+    BiBuildings, BiBuildingHouse
+} from "react-icons/bi";
+import { FaPizzaSlice } from "react-icons/fa";
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 import { List, Progress } from 'antd';
 
-import { data } from '../data'
-
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
-const allExpenses = Math.abs(data.filter(data => data.type === "Expense").reduce(((acc, curr) => acc + curr.money), 0));
-const allIncomes = data.filter(data => data.type === "Income").reduce(((acc, curr) => acc + curr.money), 0);
+export default function GridLayout({ bills }) {
+    const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
+    const allIncomes = bills.filter(data => data.type === "income").reduce(((acc, curr) => acc + Number(curr.amount)), 0);
 
+    let sortedBills = [];
 
-export default function GridLayout() {
+    const sortBillsByDate = () => {
+        sortedBills = bills.sort((a, b) => (a.date < b.date) ? 1 : -1)
+    }
+    const cashFlowBars = () => {
+        let bar1 = 0;
+        let bar2 = 0;
+
+        if (allExpenses === 0 && allIncomes === 0) {
+            bar1 = 0;
+            bar2 = 0;
+        } else if (allExpenses === 0 && allIncomes) {
+            bar1 = 0
+            bar2 = 100
+        } else if (allIncomes === 0 && allExpenses) {
+            bar1 = 100
+            bar2 = 0
+        } else if (allIncomes && allExpenses && allIncomes > allExpenses) {
+            bar1 = 100;
+            bar2 = 100 / (allIncomes / allExpenses);
+        } else if (allIncomes && allExpenses && allIncomes < allExpenses) {
+            bar1 = 100 / (allExpenses / allIncomes);
+            bar2 = 100;
+        }
+        return [bar1, bar2]
+    }
+
+    const expencePercent = cashFlowBars()[0];
+    const incomePercent = cashFlowBars()[1];
+
+    sortBillsByDate()
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -25,6 +59,10 @@ export default function GridLayout() {
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
 
+    function combineCategories() {
+        let combined = bills.filter(data => data.type == "expense").map(data => data.categorie)
+        return combined;
+    }
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
             <DateFilter />
@@ -112,19 +150,20 @@ export default function GridLayout() {
                 >
                     <div className={styles.widgetChartHeadingContainer}>
                         <h2>Cash Flow</h2>
+                        {/* <h2>Current amount: </h2> */}
                     </div>
 
                     <div className={styles.secondWidgetChartContainer}
                     >
                         <div>
                             <div>
-                                <h3>Income:</h3>
-                                <Progress percent={50} showInfo={false} />
+                                <h3>Income: {allIncomes}</h3>
+                                <Progress percent={expencePercent} showInfo={false} />
                             </div>
 
                             <div>
-                                <h3>Expense:</h3>
-                                <Progress percent={80} showInfo={false} />
+                                <h3>Expense: {allExpenses}</h3>
+                                <Progress percent={incomePercent} showInfo={false} />
                             </div>
                         </div>
                     </div>
@@ -144,15 +183,28 @@ export default function GridLayout() {
                     <div className={styles.thirdWidgetChartContainer}>
                         <List
                             itemLayout="horizontal"
-                            dataSource={data}
+                            dataSource={sortedBills.slice(0, 3)}
                             renderItem={item => (
                                 <List.Item>
+                                    <div>
+                                        {item.categorie === 'foodAndDrinks' ? <FaPizzaSlice size='1.9em' style={{ marginRight: '1em' }} /> :
+                                            item.categorie === 'shopping' ? <BiShoppingBag size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                item.categorie === 'housingAndUtilities' ? <BiBuildingHouse size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                    item.categorie === 'vehicleAndTransportation' ? <BiCar size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                        item.categorie === 'communicationAndPC' ? <BiBookOpen size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                            item.categorie === 'entertainementAndLife' ? <BiHappy size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                                item.categorie === 'investments' ? <BiMoney size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                                    item.categorie === 'salary' ? <BiDollar size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                                        item.categorie === 'lotteryAndGambling' ? <BiCoinStack size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                                            item.categorie === 'interestsAndDividents' ? <BiEuro size='2.2em' style={{ marginRight: '1em' }} /> :
+                                                                                <BiBuildings size='2.2em' style={{ marginRight: '1em' }} />
+                                        }
+                                    </div>
                                     <List.Item.Meta
                                         title={item.type}
                                         description={item.title}
-
                                     />
-                                    <div className={styles.priceContainer}>{item.money}лв</div>
+                                    <div className={styles.priceContainer}>{item.amount}лв</div>
                                 </List.Item>
                             )}
                         />
@@ -187,11 +239,11 @@ export default function GridLayout() {
                     <div className={styles.fifthWidgetChartContainer}>
                         <Pie
                             data={{
-                                labels: data.filter(data => data.type == "Expense").map(data => data.title),
+                                labels: combineCategories(),
                                 datasets: [
                                     {
                                         label: '# of votes',
-                                        data: data.filter(data => data.type == "Expense").map(data => data.money),
+                                        data: bills.filter(data => data.type == "expense").map(data => data.amount),
                                         backgroundColor: [
                                             'rgba(75, 192, 192)',
                                             'rgba(153, 102, 255)',
@@ -234,11 +286,11 @@ export default function GridLayout() {
                     <div className={styles.sixthWidgetChartContainer}>
                         <Bar
                             data={{
-                                labels: data.filter(data => data.type == "Income").map(data => data.title),
+                                labels: bills.filter(data => data.type == "income").map(data => data.title),
                                 datasets: [
                                     {
                                         label: 'Income Structure',
-                                        data: data.filter(data => data.type == "Income").map(data => data.money),
+                                        data: bills.filter(data => data.type == "income").map(data => data.amount),
                                         backgroundColor: [
                                             'rgba(75, 192, 192)',
                                             'rgba(153, 102, 255)',

@@ -20,6 +20,7 @@ export default function AnalyticsList({ bills, setBills }) {
     }
 
     sortBillsByDate()
+
     return (
         <>
             <div className={styles.analyticsListContainer}>
