@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import './index.css'
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
+import { BrowserRouter, Route, Switch, Spin } from "react-router-dom";
+import { LoadingOutlined } from '@ant-design/icons'
 import Navbar from './Navbar/Navbar'
 import LoginPage from './Login/LoginPage'
 import RegisterPage from './Register/RegisterPage'
@@ -21,6 +21,7 @@ import "../node_modules/react-resizable/css/styles.css";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true)
   const [users, setUsers] = useState([]);
 
   const currentUser = firebase.auth().currentUser;
@@ -29,7 +30,7 @@ function App() {
     firebase.auth().onAuthStateChanged(function (user) {
       if (user) {
         setUser(user);
-        console.log(user);
+        setIsLoading(false);
       } else {
         console.log("No user: ", user);
       }
@@ -47,6 +48,9 @@ function App() {
   //     });
 
   // }, []);
+  if (isLoading) {
+    return <div><LoadingOutlined style={{ fontSize: 80 }} spin /></div>
+  }
 
   return (
     <div className="App">

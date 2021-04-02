@@ -8,7 +8,7 @@ export const data = [
     },
     {
         title: 'Bought a book',
-        money: -15,
+        amount: -15,
         type: 'Expense',
         date: "11.03.2021",
         time: '13:00'
