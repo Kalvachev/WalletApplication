@@ -37,19 +37,8 @@ function App() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   database.collection("users").get()
-  //     .then((users) => {
-  //       let usersDb = [];
-  //       users.forEach((user) => {
-  //         usersDb.push(user.data());
-  //       });
-  //       setUsers(usersDb);
-  //     });
-
-  // }, []);
   if (isLoading) {
-    return <div><LoadingOutlined style={{ fontSize: 80 }} spin /></div>
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><LoadingOutlined style={{ fontSize: 400 }} spin /></div>
   }
 
   return (
@@ -60,17 +49,14 @@ function App() {
         <Switch>
           <Route exact path="/">
             {currentUser ? <HomePage /> : <LoginPage />}
-            {/* <HomePage /> */}
           </Route>
 
           <Route path="/records">
             {currentUser ? <Records /> : <LoginPage />}
-            {/* <Records /> */}
           </Route>
 
           <Route path="/analytics">
             {currentUser ? <Analytics /> : <LoginPage />}
-            {/* <Analytics /> */}
           </Route>
 
           <Route path="/login">
