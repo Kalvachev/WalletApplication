@@ -65,7 +65,7 @@ export default function GridLayout({ bills }) {
     }
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            <DateFilter />
+            <DateFilter bills={bills} />
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}
@@ -135,7 +135,7 @@ export default function GridLayout({ bills }) {
                                     bodyFontSize: 14,
                                     displayColors: false
                                 },
-                                
+
                                 maintainAspectRatio: false,
                             }}
                         />

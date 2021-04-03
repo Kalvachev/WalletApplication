@@ -20,6 +20,7 @@ import {
 
 import firebase from '../firebase'
 import styles from './addrecord.module.scss';
+import uuid from 'react-uuid'
 
 const { TabPane } = Tabs;
 
@@ -86,7 +87,7 @@ export default function AddRecord() {
                 categorie: categorie,
                 date: jsDate,
                 time: jsTime,
-
+                id: uuid()
             })
             .then(() => {
                 console.log("Successfully set!");

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { List, DeleteOutlined } from 'antd';
 import styles from './analytics.module.scss'
 import {
@@ -7,17 +7,22 @@ import {
     BiBuildings, BiBuildingHouse, BiTrashAlt
 } from "react-icons/bi";
 import { FaPizzaSlice } from "react-icons/fa";
+import { database } from "../firebase";
+import firebase from '../firebase';
 
 export default function AnalyticsList({ bills, setBills }) {
+    const [list, setList] = useState(bills);
     let sortedBills = [];
 
     const sortBillsByDate = () => {
         sortedBills = bills.sort((a, b) => (a.date < b.date) ? 1 : -1)
     }
 
-    function deleteHandler(ev) {
-        console.log(ev.target)
+    const deleteHandler = (id) => {
+        console.log(id)
     }
+
+    console.log(deleteHandler)
 
     sortBillsByDate()
 
@@ -48,7 +53,7 @@ export default function AnalyticsList({ bills, setBills }) {
                             <div className={styles.date}>{item.date}</div>
                             <div className={styles.time}>{item.time}</div>
                             <div className={styles.priceContainer}>{item.amount}лв</div>
-                            <div className={styles.deletebtn}><BiTrashAlt onClick={deleteHandler} size='1.5em' style={{ marginLeft: '1em' }} /></div>
+                            <div className={styles.deletebtn} ><BiTrashAlt size='1.5em' style={{ marginLeft: '1em' }} onClick={() => deleteHandler(item.id)} /></div>
                         </List.Item>
                     )}
                 />
