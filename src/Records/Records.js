@@ -6,7 +6,7 @@ import firebase from '../firebase'
 import { database } from '../firebase'
 import styles from './records.module.scss'
 
-defaults.global.tooltips.enabled = false
+defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 
@@ -41,8 +41,8 @@ export default function Records() {
     return (
         <div className={styles.recordsPageContainer}>
             {/* Left Graph Doughnut */}
-            <div className={styles.recordsLeftGraphDoughnut}>
-                <h2>Income</h2>
+            <div className={styles.doughnutGraph}>
+                <h2>Income Structure</h2>
                 <Card>
                     <Doughnut
                         data={{
@@ -52,20 +52,20 @@ export default function Records() {
                                     label: '# of votes',
                                     data: bills.filter(data => data.type == "income").map(data => data.amount),
                                     backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)',
-                                        'rgba(75, 192, 192, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(153, 102, 255)',
+                                        'rgba(255, 159, 64)',
+                                        'rgba(75, 192, 192)',
+                                        'rgba(255, 206, 86)',
+                                        'rgba(54, 162, 235)',
+                                        'rgba(255, 99, 132)',
                                     ],
                                     borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)',
+                                        'rgba(255, 99, 132)',
+                                        'rgba(54, 162, 235)',
+                                        'rgba(255, 206, 86)',
+                                        'rgba(75, 192, 192)',
+                                        'rgba(153, 102, 255)',
+                                        'rgba(255, 159, 64)',
                                     ],
                                     borderWidth: 1,
                                 },
@@ -76,17 +76,18 @@ export default function Records() {
                         options={{
                             tooltips: {
                                 callbacks: {
-                                    label: function (tooltipItem, data) {
-                                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                                        if (label) {
-                                            label += ': ';
-                                        }
-                                        label += Math.round(tooltipItem.yLabel * 100) / 100;
-                                        return label;
+                                    labelColor(tooltipItem, chart) {
+                                        return {
+                                            borderColor: 'rgb(255, 0, 0)',
+                                            backgroundColor: 'rgb(255, 0, 0)'
+                                        };
+                                    },
+                                    labelTextColor(tooltipItem, chart) {
+                                        return 'lightgray';
                                     }
                                 }
-                            }
+                            },
+                            maintainAspectRatio: false,
                         }}
                     />
                 </Card>
@@ -126,8 +127,8 @@ export default function Records() {
             </div>
 
             {/* Right Graph Doughnut */}
-            <div className={styles.recordsRightGraphDoughnut}>
-                <h2>Expense</h2>
+            <div className={styles.doughnutGraph}>
+                <h2>Expense Structure</h2>
 
                 <Card>
                     <Doughnut
@@ -138,20 +139,20 @@ export default function Records() {
                                     label: '# of votes',
                                     data: bills.filter(data => data.type == "expense").map(data => data.amount),
                                     backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)',
-                                        'rgba(75, 192, 192, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)',
-                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(255, 99, 132)',
+                                        'rgba(54, 162, 235)',
+                                        'rgba(255, 206, 86)',
+                                        'rgba(75, 192, 192)',
+                                        'rgba(153, 102, 255)',
+                                        'rgba(255, 159, 64)',
                                     ],
                                     borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)',
-                                        'rgba(255, 159, 64, 1)',
+                                        'rgba(255, 99, 132)',
+                                        'rgba(54, 162, 235)',
+                                        'rgba(255, 206, 86)',
+                                        'rgba(75, 192, 192)',
+                                        'rgba(153, 102, 255)',
+                                        'rgba(255, 159, 64)',
                                     ],
                                     borderWidth: 1,
                                 },
@@ -160,6 +161,19 @@ export default function Records() {
                         height={300}
                         width={300}
                         options={{
+                            tooltips: {
+                                callbacks: {
+                                    labelColor(tooltipItem, chart) {
+                                        return {
+                                            borderColor: 'rgb(255, 0, 0)',
+                                            backgroundColor: 'rgb(255, 0, 0)'
+                                        };
+                                    },
+                                    labelTextColor(tooltipItem, chart) {
+                                        return 'lightgray';
+                                    }
+                                }
+                            },
                             maintainAspectRatio: false,
                         }}
                     />
