@@ -8,10 +8,13 @@ import {
     BiBuildings, BiBuildingHouse
 } from "react-icons/bi";
 import { FaPizzaSlice } from "react-icons/fa";
-import { Pie, Doughnut, Bar } from 'react-chartjs-2';
+import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
 import { List, Progress } from 'antd';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
+
+defaults.global.tooltips.enabled = true;
+defaults.global.legend.position = 'bottom'
 
 export default function GridLayout({ bills }) {
     const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
@@ -116,26 +119,17 @@ export default function GridLayout({ bills }) {
                             options={{
                                 tooltips: {
                                     callbacks: {
-                                        title: function (tooltipItem, data) {
-                                            return data['labels'][tooltipItem[0]['index']];
+                                        labelColor(tooltipItem, chart) {
+                                            return {
+                                                borderColor: 'rgb(255, 0, 0)',
+                                                backgroundColor: 'rgb(255, 0, 0)'
+                                            };
                                         },
-                                        label: function (tooltipItem, data) {
-                                            return data['datasets'][0]['data'][tooltipItem['index']];
-                                        },
-                                        afterLabel: function (tooltipItem, data) {
-                                            var dataset = data['datasets'][0];
-                                            var percent = Math.round((dataset['data'][tooltipItem['index']] / dataset["_meta"][0]['total']) * 100)
-                                            return '(' + percent + '%)';
+                                        labelTextColor(tooltipItem, chart) {
+                                            return 'lightgray';
                                         }
-                                    },
-                                    backgroundColor: '#FFF',
-                                    titleFontSize: 16,
-                                    titleFontColor: '#0066ff',
-                                    bodyFontColor: '#000',
-                                    bodyFontSize: 14,
-                                    displayColors: false
+                                    }
                                 },
-
                                 maintainAspectRatio: false,
                             }}
                         />
@@ -267,7 +261,21 @@ export default function GridLayout({ bills }) {
                             height={200}
                             width={200}
                             options={{
+                                tooltips: {
+                                    callbacks: {
+                                        labelColor(tooltipItem, chart) {
+                                            return {
+                                                borderColor: 'rgb(255, 0, 0)',
+                                                backgroundColor: 'rgb(255, 0, 0)'
+                                            };
+                                        },
+                                        labelTextColor(tooltipItem, chart) {
+                                            return 'lightgray';
+                                        }
+                                    }
+                                },
                                 maintainAspectRatio: false,
+
                             }}
                         />
                     </div>
@@ -314,6 +322,19 @@ export default function GridLayout({ bills }) {
                             height={200}
                             width={200}
                             options={{
+                                tooltips: {
+                                    callbacks: {
+                                        labelColor(tooltipItem, chart) {
+                                            return {
+                                                borderColor: 'rgb(255, 0, 0)',
+                                                backgroundColor: 'rgb(255, 0, 0)'
+                                            };
+                                        },
+                                        labelTextColor(tooltipItem, chart) {
+                                            return 'lightgray';
+                                        }
+                                    }
+                                },
                                 maintainAspectRatio: false,
                             }}
                         />
