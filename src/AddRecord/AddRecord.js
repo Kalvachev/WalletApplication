@@ -189,7 +189,9 @@ export default function AddRecord() {
                                     label="Date"
                                     name="Date"
                                     className={styles.homepageTypeDate}>
-                                    <DatePicker style={{ width: "310px" }} onChange={setDate} disabledDate={d => !d || d.isAfter(addDays(new Date(), 7)) || d.isSameOrBefore(subDays(new Date(), 1))} />
+                                    <DatePicker style={{ width: "310px" }} onChange={setDate}
+                                    // disabledDate={d => !d || d.isAfter(addDays(new Date(), 7)) || d.isSameOrBefore(subDays(new Date(), 1))} 
+                                    />
                                 </Form.Item>
 
                                 <Form.Item

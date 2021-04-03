@@ -33,11 +33,11 @@ export default function GridLayout({ bills }) {
             bar1 = 0;
             bar2 = 0;
         } else if (allExpenses === 0 && allIncomes) {
-            bar1 = 0
-            bar2 = 100
-        } else if (allIncomes === 0 && allExpenses) {
             bar1 = 100
             bar2 = 0
+        } else if (allIncomes === 0 && allExpenses) {
+            bar1 = 0
+            bar2 = 100
         } else if (allIncomes && allExpenses && allIncomes > allExpenses) {
             bar1 = 100;
             bar2 = 100 / (allIncomes / allExpenses);
@@ -62,11 +62,76 @@ export default function GridLayout({ bills }) {
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
 
-    function combineCategories() {
-        let combined = new Set(bills.filter(data => data.type == "expense").map(data => data.categorie));
-        return Array.from(combined);
+    function combineCategories(type) {
+        let combined = new Set(bills.filter(data => data.type == type).map(data => data.categorie));
+
+        let newArr = Array.from(combined);
+        return newArr;
     }
-    
+
+    function sumExpense() {
+        let foodSum = 0;
+        let shoppingSum = 0;
+        let housingSum = 0;
+        let vehicleSum = 0;
+        let communicationSum = 0;
+        let entertanmentSum = 0;
+        let investmentsSum = 0;
+        let finalArr = [];
+
+        let combined = new Set(bills.filter(data => data.type == "expense"))
+
+        let newArr = Array.from(combined)
+
+        newArr.forEach((item) => {
+            if (item.categorie === 'foodAndDrinks') {
+                foodSum += Number(item.amount);
+            } else if (item.categorie === 'shopping') {
+                shoppingSum += Number(item.amount)
+            } else if (item.categorie === 'housingAndUtilities') {
+                housingSum += Number(item.amount)
+            } else if (item.categorie === 'vehicleAndTransportation') {
+                vehicleSum += Number(item.amount)
+            } else if (item.categorie === 'communicationAndPC') {
+                communicationSum += Number(item.amount)
+            } else if (item.categorie === 'entertainementAndLife') {
+                entertanmentSum += Number(item.amount)
+            } else if (item.categorie === 'investments') {
+                investmentsSum += Number(item.amount)
+            }
+        })
+        let arrOfSums = [foodSum, shoppingSum, housingSum, vehicleSum, communicationSum, entertanmentSum, investmentsSum];
+        let filtered = arrOfSums.filter(sum => sum > 0);
+        return filtered;
+    }
+
+    function sumIncome() {
+        let salarySum = 0;
+        let lotterySum = 0;
+        let interestsSum = 0;
+        let rentingSum = 0;
+
+
+        let combined = new Set(bills.filter(data => data.type == "income"))
+
+        let newArr = Array.from(combined)
+
+        newArr.forEach((item) => {
+            if (item.categorie === 'salary') {
+                salarySum += Number(item.amount);
+            } else if (item.categorie === 'lotteryAndGambling') {
+                lotterySum += Number(item.amount)
+            } else if (item.categorie === 'interestsAndDividents') {
+                interestsSum += Number(item.amount)
+            } else if (item.categorie === 'lendingAndRenting') {
+                rentingSum += Number(item.amount)
+            }
+        })
+        let arrOfSums = [salarySum, lotterySum, interestsSum, rentingSum];
+        let filtered = arrOfSums.filter(sum => sum > 0);
+        return filtered;
+    }
+
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
             <DateFilter bills={bills} />
@@ -234,11 +299,11 @@ export default function GridLayout({ bills }) {
                     <div className={styles.fifthWidgetChartContainer}>
                         <Pie
                             data={{
-                                labels: combineCategories(),
+                                labels: combineCategories("expense"),
                                 datasets: [
                                     {
                                         label: '# of votes',
-                                        data: bills.filter(data => data.type == "expense").map(data => data.amount),
+                                        data: sumExpense(),
                                         backgroundColor: [
                                             'rgba(75, 192, 192)',
                                             'rgba(153, 102, 255)',
@@ -295,11 +360,11 @@ export default function GridLayout({ bills }) {
                     <div className={styles.sixthWidgetChartContainer}>
                         <Bar
                             data={{
-                                labels: bills.filter(data => data.type == "income").map(data => data.title),
+                                labels: combineCategories('income'),
                                 datasets: [
                                     {
                                         label: 'Income Structure',
-                                        data: bills.filter(data => data.type == "income").map(data => data.amount),
+                                        data: sumIncome(),
                                         backgroundColor: [
                                             'rgba(75, 192, 192)',
                                             'rgba(153, 102, 255)',

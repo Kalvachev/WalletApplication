@@ -19,10 +19,10 @@ export default function AnalyticsList({ bills, setBills }) {
     }
 
     const deleteHandler = (id) => {
-        setList(list.filter((item) => item.id !== id));
+        setList(bills.filter((item) => item.id !== id));
     }
 
-    sortBillsByDate()   
+    sortBillsByDate()
 
 
     return (
