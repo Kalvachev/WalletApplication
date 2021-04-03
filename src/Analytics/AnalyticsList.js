@@ -19,12 +19,11 @@ export default function AnalyticsList({ bills, setBills }) {
     }
 
     const deleteHandler = (id) => {
-        console.log(id)
+        setList(list.filter((item) => item.id !== id));
     }
 
-    console.log(deleteHandler)
+    sortBillsByDate()   
 
-    sortBillsByDate()
 
     return (
         <>
@@ -53,7 +52,7 @@ export default function AnalyticsList({ bills, setBills }) {
                             <div className={styles.date}>{item.date}</div>
                             <div className={styles.time}>{item.time}</div>
                             <div className={styles.priceContainer}>{item.amount}лв</div>
-                            <div className={styles.deletebtn} ><BiTrashAlt size='1.5em' style={{ marginLeft: '1em' }} onClick={() => deleteHandler(item.id)} /></div>
+                            <div className={styles.deletebtn} id={item.id}><BiTrashAlt size='1.5em' style={{ marginLeft: '1em' }} onClick={() => deleteHandler(item.id)} /></div>
                         </List.Item>
                     )}
                 />

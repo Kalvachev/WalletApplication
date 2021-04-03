@@ -63,9 +63,10 @@ export default function GridLayout({ bills }) {
     ];
 
     function combineCategories() {
-        let combined = bills.filter(data => data.type == "expense").map(data => data.categorie)
-        return combined;
+        let combined = new Set(bills.filter(data => data.type == "expense").map(data => data.categorie));
+        return Array.from(combined);
     }
+    
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
             <DateFilter bills={bills} />
