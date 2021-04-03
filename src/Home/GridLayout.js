@@ -11,6 +11,8 @@ import { FaPizzaSlice } from "react-icons/fa";
 import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
 import { List, Progress } from 'antd';
 
+import { combineCategories, sumExpense, sumIncome } from './CombineSameNames'
+
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 defaults.global.tooltips.enabled = true;
@@ -61,76 +63,6 @@ export default function GridLayout({ bills }) {
         { i: "e", x: 4, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
-
-    function combineCategories(type) {
-        let combined = new Set(bills.filter(data => data.type == type).map(data => data.categorie));
-
-        let newArr = Array.from(combined);
-        return newArr;
-    }
-
-    function sumExpense() {
-        let foodSum = 0;
-        let shoppingSum = 0;
-        let housingSum = 0;
-        let vehicleSum = 0;
-        let communicationSum = 0;
-        let entertanmentSum = 0;
-        let investmentsSum = 0;
-        let finalArr = [];
-
-        let combined = new Set(bills.filter(data => data.type == "expense"))
-
-        let newArr = Array.from(combined)
-
-        newArr.forEach((item) => {
-            if (item.categorie === 'foodAndDrinks') {
-                foodSum += Number(item.amount);
-            } else if (item.categorie === 'shopping') {
-                shoppingSum += Number(item.amount)
-            } else if (item.categorie === 'housingAndUtilities') {
-                housingSum += Number(item.amount)
-            } else if (item.categorie === 'vehicleAndTransportation') {
-                vehicleSum += Number(item.amount)
-            } else if (item.categorie === 'communicationAndPC') {
-                communicationSum += Number(item.amount)
-            } else if (item.categorie === 'entertainementAndLife') {
-                entertanmentSum += Number(item.amount)
-            } else if (item.categorie === 'investments') {
-                investmentsSum += Number(item.amount)
-            }
-        })
-        let arrOfSums = [foodSum, shoppingSum, housingSum, vehicleSum, communicationSum, entertanmentSum, investmentsSum];
-        let filtered = arrOfSums.filter(sum => sum > 0);
-        return filtered;
-    }
-
-    function sumIncome() {
-        let salarySum = 0;
-        let lotterySum = 0;
-        let interestsSum = 0;
-        let rentingSum = 0;
-
-
-        let combined = new Set(bills.filter(data => data.type == "income"))
-
-        let newArr = Array.from(combined)
-
-        newArr.forEach((item) => {
-            if (item.categorie === 'salary') {
-                salarySum += Number(item.amount);
-            } else if (item.categorie === 'lotteryAndGambling') {
-                lotterySum += Number(item.amount)
-            } else if (item.categorie === 'interestsAndDividents') {
-                interestsSum += Number(item.amount)
-            } else if (item.categorie === 'lendingAndRenting') {
-                rentingSum += Number(item.amount)
-            }
-        })
-        let arrOfSums = [salarySum, lotterySum, interestsSum, rentingSum];
-        let filtered = arrOfSums.filter(sum => sum > 0);
-        return filtered;
-    }
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
@@ -216,7 +148,7 @@ export default function GridLayout({ bills }) {
                     <div className={styles.secondWidgetChartContainer}
                     >
                         <div>
-                            <div>
+                            <div className={styles.incomeBarContainer}>
                                 <h3>Income: {allIncomes}</h3>
                                 <Progress percent={expencePercent} showInfo={false} />
                             </div>
@@ -299,11 +231,11 @@ export default function GridLayout({ bills }) {
                     <div className={styles.fifthWidgetChartContainer}>
                         <Pie
                             data={{
-                                labels: combineCategories("expense"),
+                                labels: combineCategories("expense", bills),
                                 datasets: [
                                     {
                                         label: '# of votes',
-                                        data: sumExpense(),
+                                        data: sumExpense(bills),
                                         backgroundColor: [
                                             'rgba(75, 192, 192)',
                                             'rgba(153, 102, 255)',
@@ -360,11 +292,11 @@ export default function GridLayout({ bills }) {
                     <div className={styles.sixthWidgetChartContainer}>
                         <Bar
                             data={{
-                                labels: combineCategories('income'),
+                                labels: combineCategories('income', bills),
                                 datasets: [
                                     {
                                         label: 'Income Structure',
-                                        data: sumIncome(),
+                                        data: sumIncome(bills),
                                         backgroundColor: [
                                             'rgba(75, 192, 192)',
                                             'rgba(153, 102, 255)',

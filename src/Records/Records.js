@@ -5,17 +5,15 @@ import { data } from '../data'
 import firebase from '../firebase'
 import { database } from '../firebase'
 import styles from './records.module.scss'
+import { combineCategories, sumExpense, sumIncome } from '../Home/CombineSameNames'
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 
 export default function Records() {
-
     const [bills, setBills] = useState([])
     const currentUser = firebase.auth().currentUser;
-
-    const set = new Set(bills.map(d => d.date));
 
     useEffect(() => {
         let userUID = '';
@@ -24,6 +22,7 @@ export default function Records() {
             userUID = firebase.auth().currentUser.uid;
         }
 
+        // GET ALL BILLS
         database
             .collection("bills")
             .where('createdBy', '==', userUID)
@@ -46,11 +45,11 @@ export default function Records() {
                 <Card>
                     <Doughnut
                         data={{
-                            labels: bills.filter(data => data.type == "income").map(data => data.title),
+                            labels: combineCategories('income', bills),
                             datasets: [
                                 {
                                     label: '# of votes',
-                                    data: bills.filter(data => data.type == "income").map(data => data.amount),
+                                    data: sumIncome(bills),
                                     backgroundColor: [
                                         'rgba(153, 102, 255)',
                                         'rgba(255, 159, 64)',
@@ -99,7 +98,7 @@ export default function Records() {
 
                 <Line className={styles.recordsCenterGraphLinear}
                     data={{
-                        labels: Array.from(set),
+                        labels: 'red',
                         datasets: [
                             {
                                 label: "My total balance",
@@ -133,11 +132,11 @@ export default function Records() {
                 <Card>
                     <Doughnut
                         data={{
-                            labels: bills.filter(data => data.type == "expense").map(data => data.title),
+                            labels: combineCategories('expense', bills),
                             datasets: [
                                 {
                                     label: '# of votes',
-                                    data: bills.filter(data => data.type == "expense").map(data => data.amount),
+                                    data: sumExpense(bills),
                                     backgroundColor: [
                                         'rgba(255, 99, 132)',
                                         'rgba(54, 162, 235)',
