@@ -24,16 +24,16 @@ export default function Navbar({ user }) {
                         <Menu.Item key="5"><Link to="/register">Register</Link></Menu.Item>
                     </Menu>}
 
-                    {user ?  <div className={styles.navigationSecondContainer}>
+                    {user ? <div className={styles.navigationSecondContainer}>
                         <div className={styles.addRecordButton}>
-                            <AddRecord />
+                            <AddRecord user={user} />
                         </div>
 
                         <div className={styles.logoutButton}>
                             <Logout />
                         </div>
                     </div> : null}
-                   
+
                 </Header>
             </Layout>
         </div>

@@ -30,13 +30,14 @@ function App() {
         setIsLoading(false);
       } else {
         console.log("No user: ", user);
+        setIsLoading(false);
       }
     });
   }, []);
 
-  // if (isLoading) {
-  //   return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><LoadingOutlined style={{ fontSize: 400 }} spin /></div>
-  // }
+  if (isLoading) {
+    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><LoadingOutlined style={{ fontSize: 400 }} spin /></div>
+  }
 
   return (
     <div className="App">
