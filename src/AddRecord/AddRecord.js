@@ -24,13 +24,13 @@ import uuid from 'react-uuid'
 
 const { TabPane } = Tabs;
 
-export default function AddRecord() {
+export default function AddRecord({ user }) {
     const [componentSize, setComponentSize] = useState('default');
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState('');
-    const [categorie, setCategorie] = useState('');
-    const [date, setDate] = useState();;
-    const [time, setTime] = useState();
+    const [categorie, setCategorie] = useState(null);
+    const [date, setDate] = useState(null);;
+    const [time, setTime] = useState(null);
     const [activeTab, setActiveTab] = useState('expense')
 
     const onFormLayoutChange = ({ size }) => {
@@ -45,58 +45,35 @@ export default function AddRecord() {
 
 
     const onSubmit = () => {
-        const userUID = firebase.auth().currentUser.uid;
-
-        // GET ALL BILLS
-        database
-            .collection("bills")
-            .where('createdBy', '==', userUID)
-            .get()
-            .then(snpashot => {
-                let bills = [];
-
-                snpashot.forEach(bill => {
-                    bills.push(bill.data());
-                })
-                console.log(
-                    'Bills', bills
-                )
-            })
-
-
-        // GET Request
-        // database
-        //     .collection("users")
-        //     .doc(userUID)
-        //     .get()
-        //     .then(res => console.log(res.data()))
-
-        // console.log('Date: ', )
-        // console.log('Time: ', )
-
         let jsDate = moment(date).format('L');
         let jsTime = moment(time).format('LT');
 
-        database
-            .collection("bills")
-            .add({
-                type: activeTab,
-                createdBy: userUID,
-                title: title,
-                amount: amount,
-                categorie: categorie,
-                date: jsDate,
-                time: jsTime,
-                id: uuid()
-            })
-            .then(() => {
-                console.log("Successfully set!");
-            })
-            .catch((error) => {
-                console.error("Error on writing: ", error);
-            });
+        function validate() {
+            if (title && title.length > 4 && amount && amount > 0 && amount.length > 0 && categorie && date && time) {
+                database
+                    .collection("bills")
+                    .add({
+                        type: activeTab,
+                        createdBy: user.uid,
+                        title: title,
+                        amount: amount,
+                        categorie: categorie,
+                        date: jsDate,
+                        time: jsTime,
+                        id: uuid()
+                    })
+                    .then(() => {
+                        
+                    })
+                    .catch((error) => {
+                        console.error("Error on writing: ", error);
+                    });
 
-        // setVisible(false);
+                setVisible(false);
+            }
+        }
+
+        validate();
     }
 
     return (
@@ -139,13 +116,13 @@ export default function AddRecord() {
                                 <Tabs type="card" activeKey={activeTab} onChange={setActiveTab}>
                                     <TabPane tab="expense" key="expense" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
-                                            <Input type="number" value={amount} onChange={(ev) => setAmount(ev.target.value)} />
+                                            <Input type="number" min='0' value={amount} onChange={(ev) => setAmount(ev.target.value)} />
                                         </Form.Item>
                                     </TabPane>
 
                                     <TabPane tab="income" key="income" className={styles.expenseTab}>
                                         <Form.Item label="Amount" className={styles.homepageTypeAmount}>
-                                            <Input type="number" value={amount} onChange={(ev) => setAmount(ev.target.value)}
+                                            <Input type="number" min='0' value={amount} onChange={(ev) => setAmount(ev.target.value)}
                                                 className={styles.homepageTypeAmountInput} />
                                         </Form.Item>
                                     </TabPane>
