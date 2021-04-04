@@ -22,9 +22,6 @@ import "../node_modules/react-resizable/css/styles.css";
 function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true)
-  const [users, setUsers] = useState([]);
-
-  const currentUser = firebase.auth().currentUser;
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -37,9 +34,9 @@ function App() {
     });
   }, []);
 
-  if (isLoading) {
-    return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><LoadingOutlined style={{ fontSize: 400 }} spin /></div>
-  }
+  // if (isLoading) {
+  //   return <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><LoadingOutlined style={{ fontSize: 400 }} spin /></div>
+  // }
 
   return (
     <div className="App">
@@ -48,15 +45,15 @@ function App() {
 
         <Switch>
           <Route exact path="/">
-            {currentUser ? <HomePage /> : <LoginPage />}
+            {user ? <HomePage user={user} /> : <LoginPage />}
           </Route>
 
           <Route path="/records">
-            {currentUser ? <Records /> : <LoginPage />}
+            {user ? <Records user={user} /> : <LoginPage />}
           </Route>
 
           <Route path="/analytics">
-            {currentUser ? <Analytics /> : <LoginPage />}
+            {user ? <Analytics user={user} /> : <LoginPage />}
           </Route>
 
           <Route path="/login">

@@ -8,7 +8,6 @@ export default function HomePage() {
     const [bills, setBills] = useState([])
     const currentUser = firebase.auth().currentUser;
 
-
     useEffect(() => {
         let userUID = '';
 
@@ -16,7 +15,6 @@ export default function HomePage() {
             userUID = firebase.auth().currentUser.uid;
         }
 
-        // GET ALL BILLS
         database
             .collection("bills")
             .where('createdBy', '==', userUID)
@@ -30,6 +28,7 @@ export default function HomePage() {
                 setBills(bills)
             })
     }, [])
+
 
     return (
         <>

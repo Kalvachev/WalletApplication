@@ -1,29 +1,26 @@
 import React from 'react';
-import { Doughnut, defaults } from 'react-chartjs-2';
+import { Pie, defaults } from 'react-chartjs-2';
 import styles from "../homepage.module.scss"
+import { combineCategories, sumExpense } from '../CombineSameNames'
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
-export default function FirstWidget({ bills }) {
-    const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
-    const allIncomes = bills.filter(data => data.type === "income").reduce(((acc, curr) => acc + Number(curr.amount)), 0);
-
+export default function FifthWidget({ bills }) {
     return (
         <div>
-
             <div className={styles.widgetChartHeadingContainer}>
-                <h2>Income/Expense Chart</h2>
+                <h2>Expenses Structure</h2>
             </div>
 
-            <div className={styles.firstWidgetChartContainer}>
-                <Doughnut
+            <div className={styles.fifthWidgetChartContainer}>
+                <Pie
                     data={{
-                        labels: ["Income", "Expense"],
+                        labels: combineCategories("expense", bills),
                         datasets: [
                             {
                                 label: '# of votes',
-                                data: [allIncomes, allExpenses],
+                                data: sumExpense(bills),
                                 backgroundColor: [
                                     'rgba(75, 192, 192)',
                                     'rgba(153, 102, 255)',
@@ -44,6 +41,8 @@ export default function FirstWidget({ bills }) {
                             },
                         ],
                     }}
+                    height={200}
+                    width={200}
                     options={{
                         tooltips: {
                             callbacks: {
@@ -59,6 +58,7 @@ export default function FirstWidget({ bills }) {
                             }
                         },
                         maintainAspectRatio: false,
+
                     }}
                 />
             </div>
