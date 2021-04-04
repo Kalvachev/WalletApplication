@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import DateFilter from './DateFilter'
 import styles from "./homepage.module.scss"
+import moment from 'moment';
 
 import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
 
@@ -18,7 +19,7 @@ defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 export default function GridLayout({ bills }) {
-    // const [selectedDateFilter, setSelectedDateFilter] = useState(null);
+    const [selectedDateFilter, setSelectedDateFilter] = useState('month');
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -29,16 +30,18 @@ export default function GridLayout({ bills }) {
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
 
-    // const filteredBills = useMemo(() => {
-    //     return bills.filter(bill => {
-    //         return moment(bill.date).isBetween(moment().subtract(selectedDateFiler, 'd'), moment.now());
-    //     })
-    // }, [selectedDateFilter])
+    const filteredBills = useMemo(() => {
+        return bills.filter(bill => {
+            console.log(selectedDateFilter)
+            return moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now());
+        })
+    }, [selectedDateFilter])
+
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            {/* <DateFilter selectedDateFiler={selectedDateFilter} onChange={setSelectedDateFilter} /> */}
-            <DateFilter bills={bills} />
+            <DateFilter as='select' selectedDateFiler={selectedDateFilter} onChange={(ev) => console.log(ev.target)} />
+            {/* <DateFilter bills={bills} /> */}
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}
