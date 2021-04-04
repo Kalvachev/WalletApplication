@@ -23,7 +23,6 @@
 
 .firstWidgetChartContainer,
 .secondWidgetChartContainer,
-.thirdWidgetChartContainer,
 .fourthWidgetChartContainer,
 .fifthWidgetChartContainer,
 .sixthWidgetChartContainer {
@@ -52,4 +51,11 @@
 
 .incomeBarContainer {
     margin-bottom: 2em;
+}
+
+.thirdWidgetChartContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 30px;
+    min-height: 240px;
 }

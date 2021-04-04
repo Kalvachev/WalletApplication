@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../records.module.scss'
 import { Line, defaults } from 'react-chartjs-2';
-
+import firebase from '../../firebase'
+import {database} from '../../firebase'
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
@@ -12,7 +13,7 @@ export default function MiddleGraph({ bills }) {
     return (
         <div>
             <div className={styles.recordsCenterGraphLinearContainer}>
-                <h2>Hello user, your balance is: {Number(allIncomes - allExpenses)}$</h2>
+                <h2>Hello , your balance is: {Number(allIncomes - allExpenses)}$</h2>
 
                 <Line className={styles.recordsCenterGraphLinear}
                     data={{

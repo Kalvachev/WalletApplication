@@ -6,6 +6,7 @@ import firebase from '../firebase';
 import { useHistory } from 'react-router';
 
 export default function Logout() {
+    const [logout, setLogout] = useState('');
     let history = useHistory();
 
     const onLogout = () => {
@@ -14,11 +15,13 @@ export default function Logout() {
         }).catch((error) => {
             console.log(error.message);
         });
+
+        
     }
 
     return (
         <div className={styles.logoutButtonContainer}>
-            <Button type="primary" style={{ backgroundColor: 'black', borderColor: 'grey' }} onClick={onLogout}>
+            <Button type="primary" style={{ backgroundColor: 'black', borderColor: 'grey' }} onClick={() => onLogout()}>
                 <BiLogOut size='1.5em' />
             </Button>
         </div>

@@ -27,7 +27,7 @@ export default function ThirdWidget({ bills }) {
 
     return (
         <div>
-            <div className={styles.widgetChartHeadingContainer}>
+            <div className={styles.widgetChartHeadingContainer} >
                 <h2>Last Records</h2>
             </div>
 

@@ -14,7 +14,7 @@ defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 
-export default function Records() {
+export default function Records({ user }) {
     const [bills, setBills] = useState([])
     const currentUser = firebase.auth().currentUser;
 
