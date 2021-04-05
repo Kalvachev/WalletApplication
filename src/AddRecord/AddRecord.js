@@ -63,7 +63,7 @@ export default function AddRecord({ user }) {
                         id: uuid()
                     })
                     .then(() => {
-                        
+
                     })
                     .catch((error) => {
                         console.error("Error on writing: ", error);
@@ -167,7 +167,7 @@ export default function AddRecord({ user }) {
                                     name="Date"
                                     className={styles.homepageTypeDate}>
                                     <DatePicker style={{ width: "310px" }} onChange={setDate}
-                                    // disabledDate={d => !d || d.isAfter(addDays(new Date(), 7)) || d.isSameOrBefore(subDays(new Date(), 1))} 
+                                        disabledDate={d => !d || d.isAfter(addDays(new Date(), 0)) || d.isSameOrBefore(subDays(new Date(), 90))}
                                     />
                                 </Form.Item>
 
