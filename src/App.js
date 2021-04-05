@@ -10,7 +10,6 @@ import HomePage from './Home/HomePage'
 import Records from './Records/Records';
 import AddRecord from './AddRecord/AddRecord';
 import Analytics from './Analytics/Analytics';
-import AddStartIncome from './AddStartIncome/AddStartIncome';
 import firebase from "./firebase";
 import { database } from './firebase'
 
@@ -63,7 +62,6 @@ function App() {
 
           <Route path="/register">
             <RegisterPage />
-            <AddStartIncome />
           </Route>
 
           <Route path="*">

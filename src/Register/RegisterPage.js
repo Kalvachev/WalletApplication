@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './register.module.scss'
 import { useHistory } from "react-router-dom";
-
+import uuid from 'react-uuid'
 import firebase from "../firebase";
 import { database } from "../firebase";
 
@@ -10,42 +10,61 @@ export default function RegisterPage() {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [startingMoney, setStartingMoney] = useState(null)
     const [error, setError] = useState("");
-
     const history = useHistory();
 
     const onRegister = () => {
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const userUID = userCredential.user.uid;
+        if (startingMoney && startingMoney > 20) {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const userUID = userCredential.user.uid;
 
-                database
-                    .collection("users")
-                    .doc(userUID)
-                    .set({
-                        id: userUID,
-                        name: name,
-                        email: email,
-                        bills: [],
-                        // currentMoney:
-                    })
-                    .then(() => {
-                        console.log("Successfully written!");
-                    })
-                    .catch((error) => {
-                        console.error("Error on writing: ", error);
-                    });
+                    database
+                        .collection("users")
+                        .doc(userUID)
+                        .set({
+                            id: userUID,
+                            name: name,
+                            email: email,
+                            bills: [],
+                        })
+                        .then(() => {
+                            console.log("Successfully written!");
+                        })
+                        .catch((error) => {
+                            console.error("Error on writing: ", error);
+                        });
 
-                history.push("/login");
-            })
-            .catch((error) => {
-                console.log("Error: ", error);
-                setError(error.message);
-            });
+                    database
+                        .collection("bills")
+                        .add({
+                            type: 'income',
+                            createdBy: userUID,
+                            title: 'Starting money',
+                            amount: startingMoney,
+                            categorie: 'Starting Money',
+                            date: new Date().toLocaleDateString(),
+                            time: new Date().toLocaleTimeString(),
+                            id: uuid()
+                        })
+                        .then(() => {
+
+                        })
+                        .catch((error) => {
+                            console.error("Error on writing: ", error);
+                        });
+
+                    history.push("/login");
+                })
+                .catch((error) => {
+                    console.log("Error: ", error);
+                    setError(error.message);
+                });
+        }
     };
-
 
     // Form Layout
     const formItemLayout = {
@@ -174,6 +193,18 @@ export default function RegisterPage() {
                                     onInput={(ev) => setPassword(ev.target.value)}
                                 />
 
+                            </Form.Item>
+
+                            <Form.Item
+                                name="Starting Amount"
+                                label="Enter Starting amount"
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                ]}
+                            >
+                                <Input type="number" min='0' value={startingMoney} onChange={(ev) => setStartingMoney(ev.target.value)} />
                             </Form.Item>
                             <Form.Item {...tailFormItemLayout}>
                                 <Button type="primary" htmlType="submit" onClick={onRegister}>

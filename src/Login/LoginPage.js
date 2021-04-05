@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Form, Input, Button, Row, Col, Card } from 'antd';
+import { Form, Input, Button, Row, Col, Card, Alert } from 'antd';
 import styles from './login.module.scss'
 import { Link } from 'react-router-dom'
 import firebase from "../firebase";
@@ -23,7 +23,6 @@ export default function LoginPage() {
                 console.log('Successfull login:', user);
             })
             .catch((error) => {
-                console.log("Error: ", error);
                 setError(error.message);
             });
     };
@@ -57,7 +56,7 @@ export default function LoginPage() {
                     >
 
                         <h2 className={styles.loginHeading}>Login</h2>
-
+                        {error ? <Alert message='Incorrect email or password. Try again.' type="error" /> : null}
                         <Form.Item
                             label="Email"
                             name="email"
