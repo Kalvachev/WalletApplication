@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import DateFilter from './DateFilter'
 import styles from "./homepage.module.scss"
 import moment from 'moment';
-
+import firebase, { database } from '../firebase'
 import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
 
 import FirstWidget from "./HomePageWidgets/FirstWidget";
@@ -19,7 +19,9 @@ defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 export default function GridLayout({ bills }) {
-    const [selectedDateFilter, setSelectedDateFilter] = useState('month');
+    const [selectedDateFilter, setSelectedDateFilter] = useState(null);
+    const [currentUsername, setCurrentUsername] = useState('')
+    const currentUserId = firebase.auth().currentUser.uid;
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -30,17 +32,28 @@ export default function GridLayout({ bills }) {
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
 
-    const filteredBills = useMemo(() => {
-        return bills.filter(bill => {
-            console.log(selectedDateFilter)
-            return moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now());
-        })
-    }, [selectedDateFilter])
+    // const filteredBills = useMemo(() => {
+    //     return bills.filter(bill => {
+    //         console.log(selectedDateFilter)
+    //         return moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now());
+    //     })
+    // }, [selectedDateFilter])
 
+    // console.log(selectedDateFilter)
+
+    useEffect(() => {
+        database
+            .collection("users").where('id', '==', currentUserId).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setCurrentUsername(doc.data().name)
+                });
+            });
+    }, [])
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            <DateFilter as='select' selectedDateFiler={selectedDateFilter} onChange={(ev) => console.log(ev.target)} />
+            <div className={styles.heading}><h2>Hello, {currentUsername}!</h2></div>
+            <DateFilter selectedDateFiler={selectedDateFilter} onChange={(ev) => setSelectedDateFilter(ev.target.value)} />
             {/* <DateFilter bills={bills} /> */}
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
@@ -81,7 +94,7 @@ export default function GridLayout({ bills }) {
                 <div
                     key="d"
                     data-grid={{ i: "d", x: 0, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 }}
-                    style={{ background: "red" }}
+                    style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
                     <FourthWidget bills={bills} />
