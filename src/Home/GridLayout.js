@@ -20,8 +20,6 @@ defaults.global.legend.position = 'bottom'
 
 export default function GridLayout({ bills }) {
     const [selectedDateFilter, setSelectedDateFilter] = useState(null);
-    const [currentUsername, setCurrentUsername] = useState('')
-    const currentUserId = firebase.auth().currentUser.uid;
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -41,18 +39,8 @@ export default function GridLayout({ bills }) {
 
     // console.log(selectedDateFilter)
 
-    useEffect(() => {
-        database
-            .collection("users").where('id', '==', currentUserId).get().then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    setCurrentUsername(doc.data().name)
-                });
-            });
-    }, [])
-
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            <div className={styles.heading}><h2>Hello, {currentUsername}!</h2></div>
             <DateFilter selectedDateFiler={selectedDateFilter} onChange={(ev) => setSelectedDateFilter(ev.target.value)} />
             {/* <DateFilter bills={bills} /> */}
             <ResponsiveGridLayout className="layout"

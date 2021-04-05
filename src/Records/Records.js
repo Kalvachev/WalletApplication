@@ -14,8 +14,9 @@ defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 
-export default function Records({ user }) {
-    const [bills, setBills] = useState([])
+export default function Records({user}) {
+    const [bills, setBills] = useState([]);
+    const [currentUsername, setCurrentUsername] = useState('');
     const currentUser = firebase.auth().currentUser;
 
     useEffect(() => {
@@ -40,10 +41,19 @@ export default function Records({ user }) {
             })
     }, [])
 
+    useEffect(() => {
+        database
+            .collection("users").where('id', '==', user.uid).get().then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    setCurrentUsername(doc.data().name)
+                });
+            });
+    }, [])
+
     return (
         <div className={styles.recordsPageContainer}>
             <IncomeStructure bills={bills} />
-            <MiddleGraph bills={bills} />
+            <MiddleGraph bills={bills} currentUsername={currentUsername}/>
             <ExpenseStructure bills={bills} />
         </div>
     )
