@@ -12,8 +12,10 @@
 ### Technologies and libraries:
 - React
 - Ant Design
-- Sass
+- SASS
 - ChartJS
+- React Grid Layout
+- MomentJS
 
 ### Backend service:
 - Firebase
