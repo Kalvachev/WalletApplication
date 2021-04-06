@@ -16,6 +16,7 @@
 - ChartJS
 - React Grid Layout
 - MomentJS
+- React Router
 
 ### Backend service:
 - Firebase
