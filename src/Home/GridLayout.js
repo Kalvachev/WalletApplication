@@ -30,13 +30,7 @@ export default function GridLayout({ bills }) {
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
 
-    let filtered = [];
-
-    function filter() {
-        filtered = bills.filter(bill => moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now()))
-    }
-
-    filter()
+    let filtered = bills.filter(bill => moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now()))
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
