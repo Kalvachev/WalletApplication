@@ -6,11 +6,13 @@ import { Card } from 'antd';
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
-export default function FourthWidget({ bills }) {
+export default function CurrentBalanceWidget({ bills }) {
     const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
     const allIncomes = bills.filter(data => data.type === "income").reduce(((acc, curr) => acc + Number(curr.amount)), 0);
 
     return (
+
+
         <div>
             <div className={styles.fourthWidgetChartContainer}>
                 <div className={styles.middleGraphContainer}>

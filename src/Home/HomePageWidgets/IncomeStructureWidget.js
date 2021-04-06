@@ -1,29 +1,27 @@
 import React from 'react';
-import { Doughnut, defaults } from 'react-chartjs-2';
+import { Bar, defaults } from 'react-chartjs-2';
 import styles from "../homepage.module.scss"
+
+import { combineCategories, sumIncome } from '../CombineSameNames'
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
-export default function FirstWidget({ bills }) {
-    const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
-    const allIncomes = bills.filter(data => data.type === "income").reduce(((acc, curr) => acc + Number(curr.amount)), 0);
-
+export default function IncomeStructureWidget({ bills }) {
     return (
         <div>
-
             <div className={styles.widgetChartHeadingContainer}>
-                <h2>Income/Expense Chart</h2>
+                <h2>Incomes Structure</h2>
             </div>
 
-            <div className={styles.firstWidgetChartContainer}>
-                <Doughnut
+            <div className={styles.sixthWidgetChartContainer}>
+                <Bar
                     data={{
-                        labels: ["Income", "Expense"],
+                        labels: combineCategories('income', bills),
                         datasets: [
                             {
-                                label: '# of votes',
-                                data: [allIncomes, allExpenses],
+                                label: 'Income Structure',
+                                data: sumIncome(bills),
                                 backgroundColor: [
                                     'rgba(75, 192, 192)',
                                     'rgba(153, 102, 255)',
@@ -44,6 +42,8 @@ export default function FirstWidget({ bills }) {
                             },
                         ],
                     }}
+                    height={200}
+                    width={200}
                     options={{
                         tooltips: {
                             callbacks: {

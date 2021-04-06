@@ -15,7 +15,7 @@ export default function RegisterPage() {
     const history = useHistory();
 
     const onRegister = () => {
-        if (startingMoney && startingMoney > 20) {
+        if (startingMoney && startingMoney > 20 && name && name.length > 2 && password.trim().length > 5) {
             firebase
                 .auth()
                 .createUserWithEmailAndPassword(email, password)
@@ -122,7 +122,7 @@ export default function RegisterPage() {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please input your nickname!',
+                                        message: 'Nickname must be at least 3 symbols',
                                         whitespace: true,
                                     },
                                 ]}
@@ -157,7 +157,7 @@ export default function RegisterPage() {
                                 rules={[
                                     {
                                         required: true,
-                                        message: 'Please input your password!',
+                                        message: 'Password must be at least 6 symbols!',
                                     },
                                 ]}
                                 hasFeedback
@@ -201,6 +201,7 @@ export default function RegisterPage() {
                                 rules={[
                                     {
                                         required: true,
+                                        message: 'Starting Amount must be at least 20$!'
                                     },
                                 ]}
                             >

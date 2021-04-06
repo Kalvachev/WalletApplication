@@ -2,7 +2,7 @@ import React from 'react';
 import styles from "../homepage.module.scss"
 import { Progress } from 'antd';
 
-export default function SecondWidget({ bills }) {
+export default function CashFlowWidget({ bills }) {
     const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
     const allIncomes = bills.filter(data => data.type === "income").reduce(((acc, curr) => acc + Number(curr.amount)), 0);
 

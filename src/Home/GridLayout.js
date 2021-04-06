@@ -1,25 +1,26 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
+import { Select } from 'antd'
 import DateFilter from './DateFilter'
 import styles from "./homepage.module.scss"
 import moment from 'moment';
-import firebase, { database } from '../firebase'
-import { Pie, Doughnut, Bar, defaults } from 'react-chartjs-2';
+import { defaults } from 'react-chartjs-2';
 
-import FirstWidget from "./HomePageWidgets/FirstWidget";
-import SecondWidget from "./HomePageWidgets/SecondWidget";
-import ThirdWidget from "./HomePageWidgets/ThirdWidget";
-import FourthWidget from "./HomePageWidgets/FourthWidget";
-import FifthWidget from "./HomePageWidgets/FifthWidget";
-import SixthWidget from "./HomePageWidgets/SixthWidget";
+import IncomeExpenseWidget from "./HomePageWidgets/IncomeExpenseWidget";
+import CashFlowWidget from "./HomePageWidgets/CashFlowWidget";
+import LastRecordsWidget from "./HomePageWidgets/LastRecordsWidget";
+import CurrentBalanceWidget from "./HomePageWidgets/CurrentBalanceWidget";
+import ExpenseStructureWidget from "./HomePageWidgets/ExpenseStructureWidget";
+import IncomeStructureWidget from "./HomePageWidgets/IncomeStructureWidget";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
+const { Option } = Select;
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
 export default function GridLayout({ bills }) {
-    const [selectedDateFilter, setSelectedDateFilter] = useState(null);
+    const [selectedDateFilter, setSelectedDateFilter] = useState('week');
 
     const layout = [
         { i: "a", x: 0, y: 0, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
@@ -37,12 +38,15 @@ export default function GridLayout({ bills }) {
     //     })
     // }, [selectedDateFilter])
 
-    // console.log(selectedDateFilter)
+    // console.log(filteredBills)
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            <DateFilter selectedDateFiler={selectedDateFilter} onChange={(ev) => setSelectedDateFilter(ev.target.value)} />
-            {/* <DateFilter bills={bills} /> */}
+            <Select as='select' defaultValue="week" style={{ width: 320 }} bordered={false} onChange={(value) => setSelectedDateFilter(value)}>
+                <Option value="week">Last Week</Option>
+                <Option value="month">Last Month</Option>
+                <Option value="year">Last Year</Option>
+            </Select>
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}
@@ -57,7 +61,7 @@ export default function GridLayout({ bills }) {
                     className={styles.firstWidgetContainer}
                     className={styles.widgetContainer}
                 >
-                    <FirstWidget bills={bills} />
+                    <IncomeExpenseWidget bills={bills} />
                 </div>
 
                 <div
@@ -66,7 +70,7 @@ export default function GridLayout({ bills }) {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
-                    <SecondWidget bills={bills} />
+                    <CurrentBalanceWidget bills={bills} />
                 </div>
 
                 <div
@@ -76,7 +80,7 @@ export default function GridLayout({ bills }) {
                     className={styles.homePageLastRecordsContainer}
                     className={styles.widgetContainer}
                 >
-                    <ThirdWidget bills={bills} />
+                    <CashFlowWidget bills={bills} />
                 </div>
 
                 <div
@@ -85,7 +89,7 @@ export default function GridLayout({ bills }) {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
-                    <FourthWidget bills={bills} />
+                    <LastRecordsWidget bills={bills} />
                 </div>
 
                 <div
@@ -94,7 +98,7 @@ export default function GridLayout({ bills }) {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
-                    <FifthWidget bills={bills} />
+                    <ExpenseStructureWidget bills={bills} />
                 </div>
 
                 <div
@@ -103,7 +107,7 @@ export default function GridLayout({ bills }) {
                     style={{ background: "white" }}
                     className={styles.widgetContainer}
                 >
-                    <SixthWidget bills={bills} />
+                    <IncomeStructureWidget bills={bills} />
                 </div>
             </ResponsiveGridLayout>
         </div>

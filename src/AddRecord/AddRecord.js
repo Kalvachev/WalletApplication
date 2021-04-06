@@ -134,6 +134,7 @@ export default function AddRecord({ user }) {
                                     rules={[
                                         {
                                             required: true,
+                                            message: 'The title must be at least 5 symbols'
                                         },
                                     ]}
                                     name="Title"

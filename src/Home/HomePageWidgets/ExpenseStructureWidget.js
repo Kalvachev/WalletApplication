@@ -1,27 +1,26 @@
 import React from 'react';
-import { Bar, defaults } from 'react-chartjs-2';
+import { Pie, defaults } from 'react-chartjs-2';
 import styles from "../homepage.module.scss"
-
-import { combineCategories, sumIncome } from '../CombineSameNames'
+import { combineCategories, sumExpense } from '../CombineSameNames'
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
-export default function SixthWidget({ bills }) {
+export default function ExpenseStructureWidget({ bills }) {
     return (
         <div>
             <div className={styles.widgetChartHeadingContainer}>
-                <h2>Incomes Structure</h2>
+                <h2>Expenses Structure</h2>
             </div>
 
-            <div className={styles.sixthWidgetChartContainer}>
-                <Bar
+            <div className={styles.fifthWidgetChartContainer}>
+                <Pie
                     data={{
-                        labels: combineCategories('income', bills),
+                        labels: combineCategories("expense", bills),
                         datasets: [
                             {
-                                label: 'Income Structure',
-                                data: sumIncome(bills),
+                                label: '# of votes',
+                                data: sumExpense(bills),
                                 backgroundColor: [
                                     'rgba(75, 192, 192)',
                                     'rgba(153, 102, 255)',
@@ -59,6 +58,7 @@ export default function SixthWidget({ bills }) {
                             }
                         },
                         maintainAspectRatio: false,
+
                     }}
                 />
             </div>

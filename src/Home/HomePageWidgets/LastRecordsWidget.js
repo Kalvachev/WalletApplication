@@ -22,7 +22,7 @@ const ICON_CATEGORIES = {
     'lendingAndRenting': <BiBuildings size='2.2em' style={{ marginRight: '1em' }} />,
 }
 
-export default function ThirdWidget({ bills }) {
+export default function LastRecordsWidget({ bills }) {
     const sortedBills = useMemo(() => bills.sort((a, b) => (a.date < b.date) ? 1 : -1), [bills])
 
     return (

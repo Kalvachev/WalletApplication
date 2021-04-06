@@ -56,7 +56,7 @@ export default function LoginPage() {
                     >
 
                         <h2 className={styles.loginHeading}>Login</h2>
-                        {error ? <Alert message='Incorrect email or password. Try again.' type="error" /> : null}
+                        {error ? <div className={styles.errorMsg}> <Alert message='Incorrect email or password. Try again.' type="error" /></div> : null}
                         <Form.Item
                             label="Email"
                             name="email"
@@ -87,14 +87,15 @@ export default function LoginPage() {
                                 value={password}
                                 onInput={(ev) => setPassword(ev.target.value)} />
                         </Form.Item>
-
-                        <Form.Item {...tailLayout}>
-                            <Button type="primary" htmlType="submit" onClick={onLogin}>
-                                Log In
+                        <div className={styles.loginBtn}>
+                            <Form.Item {...tailLayout} >
+                                <Button type="primary" htmlType="submit" onClick={onLogin} >
+                                    Log In
                             </Button>
-                        </Form.Item>
-                        <div>
-                            Need an account? <Link to='/register'>Sign Up</Link>
+                            </Form.Item>
+                        </div>
+                        <div className={styles.accLink}>
+                            Need an account?&nbsp;<Link to='/register'>Sign Up</Link>
                         </div>
                     </Form>
                 </Card>

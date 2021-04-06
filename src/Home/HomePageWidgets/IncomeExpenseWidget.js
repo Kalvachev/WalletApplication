@@ -1,26 +1,29 @@
 import React from 'react';
-import { Pie, defaults } from 'react-chartjs-2';
+import { Doughnut, defaults } from 'react-chartjs-2';
 import styles from "../homepage.module.scss"
-import { combineCategories, sumExpense } from '../CombineSameNames'
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom'
 
-export default function FifthWidget({ bills }) {
+export default function IncomeExpenseWidget({ bills }) {
+    const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
+    const allIncomes = bills.filter(data => data.type === "income").reduce(((acc, curr) => acc + Number(curr.amount)), 0);
+
     return (
         <div>
+
             <div className={styles.widgetChartHeadingContainer}>
-                <h2>Expenses Structure</h2>
+                <h2>Income/Expense Chart</h2>
             </div>
 
-            <div className={styles.fifthWidgetChartContainer}>
-                <Pie
+            <div className={styles.firstWidgetChartContainer}>
+                <Doughnut
                     data={{
-                        labels: combineCategories("expense", bills),
+                        labels: ["Income", "Expense"],
                         datasets: [
                             {
                                 label: '# of votes',
-                                data: sumExpense(bills),
+                                data: [allIncomes, allExpenses],
                                 backgroundColor: [
                                     'rgba(75, 192, 192)',
                                     'rgba(153, 102, 255)',
@@ -41,8 +44,6 @@ export default function FifthWidget({ bills }) {
                             },
                         ],
                     }}
-                    height={200}
-                    width={200}
                     options={{
                         tooltips: {
                             callbacks: {
@@ -58,7 +59,6 @@ export default function FifthWidget({ bills }) {
                             }
                         },
                         maintainAspectRatio: false,
-
                     }}
                 />
             </div>

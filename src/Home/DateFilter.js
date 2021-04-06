@@ -10,7 +10,7 @@ export default function DateFilter({ setSelectedDateFilter, onChange }) {
 
     return (
         <div className={styles.filtersSelectComp}>
-            <Select as='select' defaultValue="month" style={{ width: 320 }} bordered={false} onChange={(ev) => setSelectedDateFilter(ev.target.value)}>
+            <Select as='select' defaultValue="month" style={{ width: 320 }} bordered={false} onChange={(value) => setSelectedDateFilter(ev.target.value)}>
                 <Option value="week">Last Week</Option>
                 <Option value="month">Last Month</Option>
                 <Option value="year">Last Year</Option>
