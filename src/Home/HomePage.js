@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import DateFilter from './DateFilter'
 import GridLayout from './GridLayout'
 import firebase from '../firebase'
 import { database } from '../firebase'

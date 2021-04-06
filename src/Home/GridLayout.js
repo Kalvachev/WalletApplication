@@ -1,7 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import { Select } from 'antd'
-import DateFilter from './DateFilter'
 import styles from "./homepage.module.scss"
 import moment from 'moment';
 import { defaults } from 'react-chartjs-2';
@@ -42,11 +41,14 @@ export default function GridLayout({ bills }) {
 
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            <Select as='select' defaultValue="week" style={{ width: 320 }} bordered={false} onChange={(value) => setSelectedDateFilter(value)}>
-                <Option value="week">Last Week</Option>
-                <Option value="month">Last Month</Option>
-                <Option value="year">Last Year</Option>
-            </Select>
+            <div className={styles.dateFilterContainer}>
+                <Select as='select' defaultValue="week" style={{ width: 320 }} bordered={false} onChange={(value) => setSelectedDateFilter(value)} className={styles.selectDate}>
+                    <Option value="week">Last Week</Option>
+                    <Option value="month">Last Month</Option>
+                    <Option value="year">Last Year</Option>
+                </Select>
+            </div>
+
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}
