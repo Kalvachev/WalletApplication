@@ -47,11 +47,13 @@ export default function GridLayout({ bills }) {
     console.log(selectedDateFilter)
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
-            <Select defaultValue="7" style={{ width: 320 }} bordered={false} onChange={(value) => setSelectedDateFilter(Number(value))}>
-                <Option value="7">Last Week</Option>
-                <Option value="30">Last Month</Option>
-                <Option value="90">Last Three Months</Option>
-            </Select>
+            <div className={styles.dateFilterContainer}>
+                <Select className={styles.selectDate} defaultValue="7" style={{ width: 320 }} bordered={false} onChange={(value) => setSelectedDateFilter(Number(value))}>
+                    <Option value="7">Last Week</Option>
+                    <Option value="30">Last Month</Option>
+                    <Option value="90">Last Three Months</Option>
+                </Select>
+            </div>
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}
