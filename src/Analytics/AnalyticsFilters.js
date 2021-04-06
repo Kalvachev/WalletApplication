@@ -2,6 +2,7 @@ import React from 'react'
 import { Menu } from 'antd';
 import { DollarOutlined, HistoryOutlined, EuroOutlined } from '@ant-design/icons';
 import styles from './analytics.module.scss';
+
 import {
     BiDrink, BiShoppingBag, BiCar, BiBookOpen,
     BiMoney, BiHappy, BiDollar, BiCoinStack, BiEuro,

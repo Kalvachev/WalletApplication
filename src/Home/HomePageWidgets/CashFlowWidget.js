@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../homepage.module.scss"
+import styles from "../homePage.module.scss"
 import { Progress } from 'antd';
 
 export default function CashFlowWidget({ bills }) {
@@ -36,19 +36,18 @@ export default function CashFlowWidget({ bills }) {
         <div>
             <div className={styles.widgetChartHeadingContainer}>
                 <h2>Cash Flow</h2>
-                {/* <h2>Current amount: </h2> */}
             </div>
 
             <div className={styles.secondWidgetChartContainer}
             >
                 <div>
                     <div className={styles.incomeBarContainer}>
-                        <h3>Income: {allIncomes}</h3>
+                        <h3>Income: {allIncomes}$</h3>
                         <Progress percent={expencePercent} showInfo={false} />
                     </div>
 
                     <div>
-                        <h3>Expense: {allExpenses}</h3>
+                        <h3>Expense: {allExpenses}$</h3>
                         <Progress percent={incomePercent} showInfo={false} />
                     </div>
                 </div>

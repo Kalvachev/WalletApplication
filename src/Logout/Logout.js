@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Button } from 'antd';
 import { BiLogOut } from 'react-icons/bi'
-import styles from './Logout.module.scss'
+import styles from './logout.module.scss'
 import firebase from '../firebase';
 import { useHistory } from 'react-router';
 
 export default function Logout() {
-    const [logout, setLogout] = useState('');
     let history = useHistory();
 
     const onLogout = () => {
@@ -15,8 +14,6 @@ export default function Logout() {
         }).catch((error) => {
             console.log(error.message);
         });
-
-        
     }
 
     return (

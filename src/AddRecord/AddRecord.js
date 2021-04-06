@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
-import { database } from '../firebase'
-import { ExpenseOptions, IncomeOptions } from './TypeExpenseOptions'
-import { subDays, addDays } from 'date-fns'
+import { database } from '../firebase';
+import { ExpenseOptions, IncomeOptions } from './TypeExpenseOptions';
+import { subDays, addDays } from 'date-fns';
+
 import {
     Form,
     Button,
-    Select,
     DatePicker,
-    InputNumber,
     Row,
     Col,
-    Card,
     Tabs,
     Input,
     TimePicker,
     Modal
 } from 'antd';
 
-import firebase from '../firebase'
-import styles from './addrecord.module.scss';
+import styles from './addRecord.module.scss';
 import uuid from 'react-uuid'
 
 const { TabPane } = Tabs;
@@ -32,17 +29,11 @@ export default function AddRecord({ user }) {
     const [date, setDate] = useState(null);;
     const [time, setTime] = useState(null);
     const [activeTab, setActiveTab] = useState('expense')
+    const [visible, setVisible] = useState(false);
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
     };
-
-    const config = {
-        rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-    };
-
-    const [visible, setVisible] = useState(false);
-
 
     const onSubmit = () => {
         let jsDate = moment(date).format('L');
@@ -107,11 +98,6 @@ export default function AddRecord({ user }) {
                             onValuesChange={onFormLayoutChange}
                             size={componentSize}
                         >
-                            {/* <h2 className={styles.homepageHeading}>
-                                Hello, username!
-                                Your Balance is 0$
-                            </h2> */}
-
                             <div className={styles.topRecordsPart}>
                                 <Tabs type="card" activeKey={activeTab} onChange={setActiveTab}>
                                     <TabPane tab="expense" key="expense" className={styles.expenseTab}>
@@ -176,9 +162,11 @@ export default function AddRecord({ user }) {
                                     rules={[
                                         {
                                             required: true,
+                                            type: 'object',
+                                            message: 'Please select time!'
                                         },
                                     ]}
-                                    label="Time" {...config}
+                                    label="Time"
                                     name="Time"
                                 >
 

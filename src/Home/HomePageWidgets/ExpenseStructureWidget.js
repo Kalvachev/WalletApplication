@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pie, defaults } from 'react-chartjs-2';
-import styles from "../homepage.module.scss"
+import styles from "../homePage.module.scss"
 import { combineCategories, sumExpense } from '../CombineSameNames'
 
 defaults.global.tooltips.enabled = true;
@@ -46,19 +46,18 @@ export default function ExpenseStructureWidget({ bills }) {
                     options={{
                         tooltips: {
                             callbacks: {
-                                labelColor(tooltipItem, chart) {
+                                labelColor() {
                                     return {
                                         borderColor: 'rgb(255, 0, 0)',
                                         backgroundColor: 'rgb(255, 0, 0)'
                                     };
                                 },
-                                labelTextColor(tooltipItem, chart) {
+                                labelTextColor() {
                                     return 'lightgray';
                                 }
                             }
                         },
                         maintainAspectRatio: false,
-
                     }}
                 />
             </div>

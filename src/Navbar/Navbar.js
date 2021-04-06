@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Layout, Menu } from 'antd';
 import { Link } from 'react-router-dom'
 import AddRecord from '../AddRecord/AddRecord'
@@ -9,7 +9,7 @@ const { Header } = Layout;
 
 export default function Navbar({ user }) {
     return (
-        <><div>
+        <div>
             <Layout>
                 <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }} className={styles.navigationContainer}>
                     {user ? <Menu theme="dark" mode="horizontal">
@@ -33,11 +33,9 @@ export default function Navbar({ user }) {
                             <Logout />
                         </div>
                     </div> : null}
-
                 </Header>
             </Layout>
         </div>
-        </>
     )
 }
 

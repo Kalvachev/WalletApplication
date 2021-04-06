@@ -1,9 +1,9 @@
 import React from 'react';
 import { Doughnut, defaults } from 'react-chartjs-2';
-import styles from "../homepage.module.scss"
+import styles from "../homePage.module.scss";
 
 defaults.global.tooltips.enabled = true;
-defaults.global.legend.position = 'bottom'
+defaults.global.legend.position = 'bottom';
 
 export default function IncomeExpenseWidget({ bills }) {
     const allExpenses = Math.abs(bills.filter(data => data.type === "expense").reduce(((acc, curr) => acc + Number(curr.amount)), 0))
@@ -11,7 +11,6 @@ export default function IncomeExpenseWidget({ bills }) {
 
     return (
         <div>
-
             <div className={styles.widgetChartHeadingContainer}>
                 <h2>Income/Expense Chart</h2>
             </div>
@@ -47,13 +46,13 @@ export default function IncomeExpenseWidget({ bills }) {
                     options={{
                         tooltips: {
                             callbacks: {
-                                labelColor(tooltipItem, chart) {
+                                labelColor() {
                                     return {
                                         borderColor: 'rgb(255, 0, 0)',
                                         backgroundColor: 'rgb(255, 0, 0)'
                                     };
                                 },
-                                labelTextColor(tooltipItem, chart) {
+                                labelTextColor() {
                                     return 'lightgray';
                                 }
                             }

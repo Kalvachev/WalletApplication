@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bar, defaults } from 'react-chartjs-2';
-import styles from "../homepage.module.scss"
+import styles from "../homePage.module.scss"
 
 import { combineCategories, sumIncome } from '../CombineSameNames'
 
@@ -47,13 +47,13 @@ export default function IncomeStructureWidget({ bills }) {
                     options={{
                         tooltips: {
                             callbacks: {
-                                labelColor(tooltipItem, chart) {
+                                labelColor() {
                                     return {
                                         borderColor: 'rgb(255, 0, 0)',
                                         backgroundColor: 'rgb(255, 0, 0)'
                                     };
                                 },
-                                labelTextColor(tooltipItem, chart) {
+                                labelTextColor() {
                                     return 'lightgray';
                                 }
                             }

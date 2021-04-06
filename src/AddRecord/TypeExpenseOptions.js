@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Select } from 'antd'
 
 function ExpenseOptions({ categorie, setCategorie }) {
@@ -28,6 +28,7 @@ function IncomeOptions({ categorie, setCategorie }) {
                 required={true}
                 onChange={(value) => setCategorie(value)}
                 style={{ width: "310px" }} >
+                    
                 <Select.Option value="salary">Salary</Select.Option>
                 <Select.Option value="lotteryAndGambling">Lottery &amp; Gambling</Select.Option>
                 <Select.Option value="interestsAndDividents">Interests &amp; Dividends</Select.Option>

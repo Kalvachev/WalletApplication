@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Select, Button, Card } from 'antd';
+import { Form, Input, Button, Card } from 'antd';
 import styles from './addStartIncome.module.scss'
 
 const PriceInput = ({ value = {}, onChange }) => {

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-
 import './index.css'
-import { BrowserRouter, Route, Switch, Spin } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { LoadingOutlined } from '@ant-design/icons'
 import Navbar from './Navbar/Navbar'
 import LoginPage from './Login/LoginPage'
 import RegisterPage from './Register/RegisterPage'
 import HomePage from './Home/HomePage'
 import Records from './Records/Records';
-import AddRecord from './AddRecord/AddRecord';
 import Analytics from './Analytics/Analytics';
+import ErrorPage from './ErrorPage/ErrorPage';
 import firebase from "./firebase";
-import { database } from './firebase'
 
 import 'antd/dist/antd.css';
 
@@ -48,23 +46,24 @@ function App() {
             {user ? <HomePage user={user} /> : <LoginPage />}
           </Route>
 
-          <Route path="/records">
+          <Route exact path="/records">
             {user ? <Records user={user} /> : <LoginPage />}
           </Route>
 
-          <Route path="/analytics">
+          <Route exact path="/analytics">
             {user ? <Analytics user={user} /> : <LoginPage />}
           </Route>
 
-          <Route path="/login">
+          <Route exact path="/login">
             <LoginPage />
           </Route>
 
-          <Route path="/register">
+          <Route exact path="/register">
             <RegisterPage />
           </Route>
 
           <Route path="*">
+            <ErrorPage/>
           </Route>
         </Switch>
       </BrowserRouter>

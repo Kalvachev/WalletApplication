@@ -1,7 +1,7 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
-import { Select } from 'antd'
-import styles from "./homepage.module.scss"
+import { Select } from 'antd';
+import styles from "./homePage.module.scss";
 import moment from 'moment';
 import { defaults } from 'react-chartjs-2';
 
@@ -30,21 +30,14 @@ export default function GridLayout({ bills }) {
         { i: "f", x: 8, y: 1, w: 4, h: 1, minW: 4, maxW: 4, minH: 1, maxH: 1 },
     ];
 
-    // const filteredBills = useMemo(() => {
-    //     return bills.filter(bill => {
-    //         console.log(bill.date)
-    //         return moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now());
-    //     })
-    // }, [selectedDateFilter])
-
     let filtered = [];
 
     function filter() {
         filtered = bills.filter(bill => moment(bill.date).isBetween(moment().subtract(selectedDateFilter, 'd'), moment.now()))
     }
+
     filter()
 
-    console.log(selectedDateFilter)
     return (
         <div className={styles.gridContainer} style={{ background: "rgb(245, 245, 245)" }}>
             <div className={styles.dateFilterContainer}>
@@ -54,6 +47,7 @@ export default function GridLayout({ bills }) {
                     <Option value="90">Last Three Months</Option>
                 </Select>
             </div>
+
             <ResponsiveGridLayout className="layout"
                 layouts={layout}
                 breakpoints={{ lg: 1200 }}

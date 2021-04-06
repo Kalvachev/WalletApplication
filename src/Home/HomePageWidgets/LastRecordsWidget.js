@@ -1,11 +1,13 @@
 import React, { useMemo } from 'react';
-import styles from "../homepage.module.scss"
+import styles from '../homePage.module.scss';
 import { List } from 'antd';
+
 import {
     BiShoppingBag, BiCar, BiBookOpen,
     BiMoney, BiHappy, BiDollar, BiCoinStack, BiEuro,
     BiBuildings, BiBuildingHouse
 } from "react-icons/bi";
+
 import { FaPizzaSlice } from "react-icons/fa";
 
 const ICON_CATEGORIES = {
@@ -44,7 +46,7 @@ export default function LastRecordsWidget({ bills }) {
                                 title={item.type}
                                 description={item.title}
                             />
-                            <div className={styles.priceContainer}>{item.amount}лв</div>
+                            <div className={styles.priceContainer}>{item.amount}$</div>
                         </List.Item>
                     )}
                 />

@@ -1,11 +1,13 @@
-import React, { useMemo } from 'react'
+import React, { useMemo } from 'react';
 import { List } from 'antd';
-import styles from './analytics.module.scss'
+import styles from './analytics.module.scss';
+
 import {
     BiShoppingBag, BiCar, BiBookOpen,
     BiMoney, BiHappy, BiDollar, BiCoinStack, BiEuro,
     BiBuildings, BiBuildingHouse, BiTrashAlt
 } from "react-icons/bi";
+
 import { FaPizzaSlice } from "react-icons/fa";
 import { database } from '../firebase'
 
@@ -56,7 +58,7 @@ export default function AnalyticsList({ bills, setBills, setAllBills }) {
                             />
                             <div className={styles.date}>{item.date}</div>
                             <div className={styles.time}>{item.time}</div>
-                            <div className={styles.priceContainer}>{item.amount}лв</div>
+                            <div className={styles.priceContainer}>{item.amount}$</div>
                             <div className={styles.deletebtn} id={item.id}><BiTrashAlt size='1.5em' style={{ marginLeft: '1em' }} onClick={() => deleteHandler(item.id)} /></div>
                         </List.Item>
                     )}

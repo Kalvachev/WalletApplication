@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Form, Input, Button, Row, Col, Card } from 'antd';
 import styles from './register.module.scss'
 import { useHistory } from "react-router-dom";

@@ -47,13 +47,13 @@ export default function ExpenseStructure({ bills }) {
                         options={{
                             tooltips: {
                                 callbacks: {
-                                    labelColor(tooltipItem, chart) {
+                                    labelColor() {
                                         return {
                                             borderColor: 'rgb(255, 0, 0)',
                                             backgroundColor: 'rgb(255, 0, 0)'
                                         };
                                     },
-                                    labelTextColor(tooltipItem, chart) {
+                                    labelTextColor() {
                                         return 'lightgray';
                                     }
                                 }
