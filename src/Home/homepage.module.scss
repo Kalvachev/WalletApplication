@@ -1,5 +1,5 @@
 .gridContainer {
-    margin-top: 7%;
+    margin-top: 6%;
 }
 
 .firstWidgetContainer {
@@ -95,4 +95,15 @@
 
 .fourthWidgetChartContainer{
     padding: 40px 30px;
+}
+
+.dateFilterContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+.selectDate {
+    border: 1px solid black;
+
 }

@@ -3,7 +3,6 @@ import { Form, Input, Button, Row, Col, Card, Alert } from 'antd';
 import styles from './login.module.scss'
 import { Link } from 'react-router-dom'
 import firebase from "../firebase";
-import { loginWithCredentials } from './LoginService';
 import { useHistory } from "react-router-dom";
 
 export default function LoginPage() {

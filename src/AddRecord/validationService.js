@@ -1,3 +1,0 @@
-function validateBills(bill) {
-    
-}
