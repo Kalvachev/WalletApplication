@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import DateFilter from './DateFilter'
 import GridLayout from './GridLayout'
 import firebase from '../firebase'
 import { database } from '../firebase'
@@ -31,10 +30,8 @@ export default function HomePage() {
 
 
     return (
-        <>
-            <div >
-                <GridLayout bills={bills} setBills={setBills} />
-            </div>
-        </>
+        <div >
+            <GridLayout bills={bills} setBills={setBills} />
+        </div>
     )
 }
