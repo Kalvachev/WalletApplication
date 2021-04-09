@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/WalletApplication/static/css/main.19cda198.chunk.css",
+    "main.js": "/WalletApplication/static/js/main.fd87366f.chunk.js",
+    "main.js.map": "/WalletApplication/static/js/main.fd87366f.chunk.js.map",
+    "runtime-main.js": "/WalletApplication/static/js/runtime-main.ffbe7deb.js",
+    "runtime-main.js.map": "/WalletApplication/static/js/runtime-main.ffbe7deb.js.map",
+    "static/css/2.11c74f2c.chunk.css": "/WalletApplication/static/css/2.11c74f2c.chunk.css",
+    "static/js/2.30862128.chunk.js": "/WalletApplication/static/js/2.30862128.chunk.js",
+    "static/js/2.30862128.chunk.js.map": "/WalletApplication/static/js/2.30862128.chunk.js.map",
+    "index.html": "/WalletApplication/index.html",
+    "static/css/2.11c74f2c.chunk.css.map": "/WalletApplication/static/css/2.11c74f2c.chunk.css.map",
+    "static/css/main.19cda198.chunk.css.map": "/WalletApplication/static/css/main.19cda198.chunk.css.map",
+    "static/js/2.30862128.chunk.js.LICENSE.txt": "/WalletApplication/static/js/2.30862128.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ffbe7deb.js",
+    "static/css/2.11c74f2c.chunk.css",
+    "static/js/2.30862128.chunk.js",
+    "static/css/main.19cda198.chunk.css",
+    "static/js/main.fd87366f.chunk.js"
+  ]
+}
