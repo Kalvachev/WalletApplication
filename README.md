@@ -2,7 +2,7 @@
 
 ## Create finance tracker with basic functionality
 
-### Link to hosted project: [WalletApplication](kalvachev.github.io/walletapplication/)
+### Link to hosted project: [WalletApplication](https://kalvachev.github.io/WalletApplication/)
 
 ### Contributors: [Kalin Roussinov](https://github.com/kalinrouss "Kalin Roussinov") and [Alexander Kalvachev](https://github.com/Kalvachev "Alexander Kalvachev")
 
