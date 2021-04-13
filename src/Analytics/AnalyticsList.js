@@ -52,10 +52,14 @@ export default function AnalyticsList({ bills, setBills, setAllBills }) {
                     renderItem={item => (
                         <List.Item>
                             {ICON_CATEGORIES[item.categorie]}
-                            <List.Item.Meta
-                                title={item.title}
-                                description={item.type}
-                            />
+
+                            <div className={styles.titleContainer}>
+                                <List.Item.Meta
+                                    title={item.title}
+                                    description={item.type}
+                                />
+                            </div>
+                            
                             <div className={styles.date}>{item.date}</div>
                             <div className={styles.time}>{item.time}</div>
                             <div className={styles.priceContainer}>{item.amount}$</div>
