@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pie, defaults } from 'react-chartjs-2';
-import styles from "../homePage.module.scss"
+import styles from "../home.module.scss";
 import { combineCategories, sumExpense } from '../CombineSameNames'
 
 defaults.global.tooltips.enabled = true;

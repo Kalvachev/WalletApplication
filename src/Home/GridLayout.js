@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import { Select } from 'antd';
-import styles from "./homePage.module.scss";
+import styles from "./home.module.scss";
 import moment from 'moment';
 import { defaults } from 'react-chartjs-2';
 

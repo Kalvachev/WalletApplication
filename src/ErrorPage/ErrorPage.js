@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './errorPage.module.scss';
+import styles from './error.module.scss';
 import { Button } from 'antd';
 import { useHistory } from 'react-router';
 

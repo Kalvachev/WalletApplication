@@ -16,7 +16,7 @@ import {
     Modal
 } from 'antd';
 
-import styles from './addRecord.module.scss';
+import styles from './addrecord.module.scss';
 import uuid from 'react-uuid'
 
 const { TabPane } = Tabs;

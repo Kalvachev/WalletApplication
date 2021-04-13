@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../homePage.module.scss"
+import styles from "../home.module.scss";
 import { defaults } from 'react-chartjs-2';
 
 defaults.global.tooltips.enabled = true;

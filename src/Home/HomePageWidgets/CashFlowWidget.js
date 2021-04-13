@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "../homePage.module.scss"
+import styles from "../home.module.scss";
 import { Progress } from 'antd';
 
 export default function CashFlowWidget({ bills }) {

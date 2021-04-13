@@ -1,6 +1,6 @@
 import React from 'react';
 import { Doughnut, defaults } from 'react-chartjs-2';
-import styles from "../homePage.module.scss";
+import styles from "../home.module.scss";
 
 defaults.global.tooltips.enabled = true;
 defaults.global.legend.position = 'bottom';

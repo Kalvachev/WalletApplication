@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import styles from '../homePage.module.scss';
+import styles from "../home.module.scss";
 import { List } from 'antd';
 
 import {
