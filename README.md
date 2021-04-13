@@ -1,4 +1,4 @@
-## <img src="https://user-images.githubusercontent.com/43339813/114406015-dc261f00-9baf-11eb-9f64-f34e7412d937.png" width="400" title="WalletApplication logo"> ##
+## <img src="https://user-images.githubusercontent.com/43339813/114406015-dc261f00-9baf-11eb-9f64-f34e7412d937.png" width="300" title="WalletApplication logo"> ##
 
 ## Create finance tracker with basic functionality
 
