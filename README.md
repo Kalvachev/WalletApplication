@@ -19,6 +19,7 @@
 - React Grid Layout
 - MomentJS
 - React Router
+- React Icons
 
 #### Main functionalities:
 - Register / Login / Logout
@@ -32,7 +33,7 @@
 - Filter All records by type
 - Filter by different time periods
 
-### Backend service:
+#### Backend service:
 - Firebase
 
 ### Screenshots: 
