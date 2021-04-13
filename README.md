@@ -1,17 +1,17 @@
 ## <img src="https://user-images.githubusercontent.com/43339813/114406015-dc261f00-9baf-11eb-9f64-f34e7412d937.png" width="300" title="WalletApplication logo"> ##
 
-## Create finance tracker with basic functionality
+### Create finance tracker with basic functionality
 
-### Link to hosted project: [WalletApplication](https://kalvachev.github.io/WalletApplication/)
+#### Link to hosted project: [WalletApplication](https://kalvachev.github.io/WalletApplication/)
 
-### Contributors: [Kalin Roussinov](https://github.com/kalinrouss "Kalin Roussinov") and [Alexander Kalvachev](https://github.com/Kalvachev "Alexander Kalvachev")
+#### Contributors: [Kalin Roussinov](https://github.com/kalinrouss "Kalin Roussinov") and [Alexander Kalvachev](https://github.com/Kalvachev "Alexander Kalvachev")
 
-### Languages:
+#### Languages:
 - JavaScript
 - HTML5
 - CSS3
 
-### Technologies and libraries:
+#### Technologies and libraries:
 - React
 - Ant Design
 - SASS
@@ -19,6 +19,18 @@
 - React Grid Layout
 - MomentJS
 - React Router
+
+#### Main functionalities:
+- Register/Login/Logout
+- Widget-Based Homepage
+- Income : Expense Chart
+- Cash Flow Progress Bar
+- Expenses Structure Chart
+- Income Structure Chart
+- List with All records of the user
+- Add / Remove Records
+- Filter All records by type
+- Filter by different time periods
 
 ### Backend service:
 - Firebase
