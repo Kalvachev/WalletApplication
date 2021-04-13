@@ -36,6 +36,8 @@
 #### Backend service:
 - Firebase
 
+#### You can check our presentation: [Presentation](https://github.com/Kalvachev/WalletApplication/files/6305646/Portfolio.pdf)
+
 ### Screenshots: 
 ![Screenshot_1](https://user-images.githubusercontent.com/43339813/113721513-45151f00-96f8-11eb-9548-171abee34bcc.png)
 
