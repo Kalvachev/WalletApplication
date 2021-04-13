@@ -2,7 +2,7 @@
 
 ### Create finance tracker with basic functionality
 
-#### Link to hosted project: [WalletApplication](https://kalvachev.github.io/WalletApplication/)
+#### Link to hosted project: [WalletApplication](https://applicationwallet.netlify.app/)
 
 #### Contributors: [Kalin Roussinov](https://github.com/kalinrouss "Kalin Roussinov") and [Alexander Kalvachev](https://github.com/Kalvachev "Alexander Kalvachev")
 
