@@ -38,7 +38,7 @@
 
 #### You can check our presentation: [Presentation](https://github.com/Kalvachev/WalletApplication/files/6305646/Portfolio.pdf)
 
-### Screenshots: 
+#### Screenshots: 
 ![Screenshot_1](https://user-images.githubusercontent.com/43339813/113721513-45151f00-96f8-11eb-9548-171abee34bcc.png)
 
 ![Screenshot_2](https://user-images.githubusercontent.com/43339813/113721525-49d9d300-96f8-11eb-9c66-5e2e5869f6d4.png)
