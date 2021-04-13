@@ -21,7 +21,7 @@
 - React Router
 
 #### Main functionalities:
-- Register/Login/Logout
+- Register / Login / Logout
 - Widget-Based Homepage
 - Income : Expense Chart
 - Cash Flow Progress Bar
