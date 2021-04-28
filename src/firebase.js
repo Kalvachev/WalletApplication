@@ -1,13 +1,14 @@
 import firebase from 'firebase'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBlLboct0cr6qPbJQRSh8bYHtJKjT7emkM",
-    authDomain: "wallet-application-4ad52.firebaseapp.com",
-    projectId: "wallet-application-4ad52",
-    storageBucket: "wallet-application-4ad52.appspot.com",
-    messagingSenderId: "151394693748",
-    appId: "1:151394693748:web:6f44374270afbb0690d721"
-}
+    apiKey: "AIzaSyA1ABOLg11CYlKlhvQjSkiKa-ibNc8YIvw",
+    authDomain: "wallettracker-75bf7.firebaseapp.com",
+    projectId: "wallettracker-75bf7",
+    storageBucket: "wallettracker-75bf7.appspot.com",
+    messagingSenderId: "463827348176",
+    appId: "1:463827348176:web:670f8b5473955014f40cd5",
+    measurementId: "G-NVHYHB5JTZ"
+};
 
 firebase.initializeApp(firebaseConfig)
 
